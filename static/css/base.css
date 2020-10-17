@@ -1,0 +1,6 @@
+.home_hero{
+    background: url('/media/welcome_photo.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
