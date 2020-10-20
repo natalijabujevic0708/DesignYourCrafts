@@ -24,6 +24,7 @@
     {% endblock %}
 
     {% block corejs %}
+
     <script src="https://kit.fontawesome.com/e10eaf955c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -49,6 +50,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- Header on small and medium screens-->
             <li class="list-inline-item dropdown">
                 <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -60,7 +62,7 @@
                 <div class="dropdown-menu border-0" aria-labelledby="user-options">
                     {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
-                    <a href="{% url 'account_logout' %}" class="dropdown-item">Product Management</a>
+                    <a href="#" class="dropdown-item">Product Management</a>
                     {% endif %}
                     <a href="#" class="dropdown-item">My Profile</a>
                     <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -73,7 +75,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto ">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'home' %}"> Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About Us</a>
@@ -85,8 +87,8 @@
                         <a class="nav-link" href="{% url 'products' %}">Start the design</a>
                     </li>
                 </ul>
-
             </div>
+            <!-- Header on large screens-->
             <div class="d-none d-lg-block col-lg-4 my-auto py-1 py-lg-0 text-center">
                 <a href="{% url 'home' %}" class="nav-link text_black">
                     <h2 class="logo-font my-0">Design Your Crafts</h2>
@@ -105,7 +107,7 @@
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
-                            <a href="" class="dropdown-item">Product Management</a>
+                            <a href="#" class="dropdown-item">Product Management</a>
                             {% endif %}
                             <a href="" class="dropdown-item">My Profile</a>
                             <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
