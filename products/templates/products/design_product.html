@@ -5,11 +5,17 @@
 <div class="container-fluid product_design_container">
     <div class="row">
         <div id="container" class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-1">
+            <!--SVG layer-->
             <svg id="product-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 version="1.1" preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 {{ product.viewBox_width }} {{ product.viewBox_height }}" width="{{ product.svg_width }}"
                 height="{{ product.svg_height }}">
                 <defs>
+                    {% for pattern in patterns %}
+                    <pattern id="{{ pattern.sku }}" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                        <image height="1" width="1" preserveAspectRatio="none" xlink:href="{{ pattern.href }}" />
+                    </pattern>
+                    {% endfor %}
                     <path d="{{ product.svg_path }}" id="{{ product.svg_id }}" />
                 </defs>
                 <g>
@@ -23,25 +29,32 @@
                     </g>
                 </g>
             </svg>
+            <!--Background image-->
             <img id="background-image" class="card-img-top img-fluid" src="{{ product.image.url }}"
                 alt="{{ product.name }}">
+            <!--Lock image-->
             {% if product.image_lock %}
-            <img id="lock_image" class="card-img-top img-fluid" src="{{ product.image_lock.url }}"
-                alt="Lock">
+            <img id="lock_image" class="card-img-top img-fluid" src="{{ product.image_lock.url }}" alt="Lock">
             {% endif %}
-
         </div>
     </div>
 </div>
-</div>
+<!--Options - colors-->
 <div class="colors">
-    <div class="color" style="background-color: #e1e851" data-hex="#e1e851"></div>
-    <div class="color" style="background-color: #8cd147" data-hex="#8cd147"></div>
-    <div class="color" style="background-color: #4a9ccf" data-hex="#4a9ccf"></div>
-    <div class="color" style="background-color: #661f45" data-hex="#661f45"></div>
-    <div class="color" style="background-color: #1e2024" data-hex="#1e2024"></div>
+    {% for color in colors %}
+    <div class="color" data-hex="{{color.hex_value}}"></div>
+    {% endfor %}
 </div>
+<!--Options - patterns-->
+<div class="patterns">
+    {% for pattern in patterns %}
+    <div class="pattern" id="{{ pattern.sku }}" title="{{ pattern.href }}"></div>
+    {% endfor %}
+</div>
+
 {% endblock %}
+
 {% block postloadjs %}
-<script src="{% static 'js/design.js' %}"></script>
+<script src="{% static 'js/apply_design.js' %}"></script>
+<script src="{% static 'js/set_backgrounds.js' %}"></script>
 {% endblock %}
