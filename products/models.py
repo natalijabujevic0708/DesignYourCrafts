@@ -17,6 +17,7 @@ class Category(models.Model):
         return self.friendly_name
 
 
+
 class Product(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
@@ -32,7 +33,19 @@ class Product(models.Model):
     svg_width = models.CharField(max_length=1000, null=True, blank=True)
     svg_height = models.CharField(max_length=1000, null=True, blank=True)
 
-
-
     def __str__(self):
         return self.name
+
+class Pattern(models.Model):
+    sku = models.CharField(max_length=254, null=True, blank=True)
+    href = models.CharField(max_length=1000, null=True, blank=True)
+   
+
+
+class Color(models.Model):
+    sku = models.CharField(max_length=254, null=True, blank=True)
+    hex_value = models.CharField(max_length=254, null=True, blank=True)
+   
+
+
+    
