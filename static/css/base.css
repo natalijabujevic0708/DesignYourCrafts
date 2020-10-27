@@ -30,12 +30,16 @@ body, html {
   box-sizing: border-box;
 }
 
-#container {
+#container, #text_area_div {
   position: relative;
 }
 
-#lock_image {
+#lock_image, .colors, .patterns, .font_family, .slide_container {
   z-index: 3;
+}
+
+#text_area_div, .font_family {
+  z-index: 4;
 }
 
 #product-svg {
@@ -55,11 +59,18 @@ body, html {
   height: auto;
 }
 
-.colors, .patterns {
+.colors, .patterns, .font_family, .slide_container {
   display: flex;
   position: fixed;
   right: 2em;
-  z-index: 3;
+}
+
+.font_family {
+  bottom: 15em;
+}
+
+.slide_container {
+  bottom: 20em;
 }
 
 .colors {
@@ -75,7 +86,6 @@ body, html {
   border-radius: 18px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   border: 2px solid #aaa;
-  cursor: pointer;
 }
 
 .color {
@@ -83,9 +93,27 @@ body, html {
   width: 36px;
 }
 
+.color, .pattern, #text_area_div {
+  cursor: pointer;
+}
+
 .pattern {
   background-position: center;
   background-size: contain;
   height: 100px;
   width: 100px;
+}
+
+#text_area_div {
+  display: inline-block;
+
+}
+
+textarea {
+  height: 100%;
+  width: 100%;
+  resize: both;
+  background: transparent;
+  border: transparent;
+  margin: 10px;
 }

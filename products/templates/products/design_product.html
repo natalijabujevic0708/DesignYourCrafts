@@ -39,6 +39,7 @@
         </div>
     </div>
 </div>
+
 <!--Options - colors-->
 <div class="colors">
     {% for color in colors %}
@@ -51,10 +52,31 @@
     <div class="pattern" id="{{ pattern.sku }}" title="{{ pattern.href }}"></div>
     {% endfor %}
 </div>
-
+<!--Change font-size-->
+<div class="slide_container">
+    <p>Change font size: </p>
+    <input id="font_slide" type="range" min="1" max="200" value="50">
+</div>
+<!--Change font-family-->
+<div class="font_family">
+    <label for="font_family">Choose a font-family: </label>
+    <select name="font_family" id="font_family">
+        <option value="Amatic SC" style="font-family: 'Amatic SC', cursive"> Amatic SC</option>
+        <option value="Dancing Script" style="font-family: 'Dancing Script', cursive;">Dancing Script</option>
+        <option value="Homemade Apple" style="font-family: 'Homemade Apple', cursive;">Homemade Apple</option>
+        <option value="Sacramento" style="font-family: 'Sacramento', cursive;">Sacramento</option>
+        <option value="Satisfy" style="font-family: 'Satisfy', cursive;">Satisfy</option>
+    </select>
+</div>
+<!--Input text -->
+<div id="text_area_div">
+    <textarea id="textarea">Input text</textarea>
+</div>
 {% endblock %}
 
 {% block postloadjs %}
 <script src="{% static 'js/apply_design.js' %}"></script>
 <script src="{% static 'js/set_backgrounds.js' %}"></script>
+<script src="{% static 'js/resize_edit_text.js' %}"></script>
+
 {% endblock %}
