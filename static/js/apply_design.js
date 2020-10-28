@@ -3,7 +3,6 @@
 const overlay = document.getElementById("product-shape");
 
 // Click on a color
-
 var el = document.getElementsByClassName("color", "pattern");
 for (var i = 0; i < el.length; i++) {
   el[i].onclick = changeColor;
@@ -15,7 +14,7 @@ function changeColor(e) {
   // set the hex color
   overlay.style.fill = hex;
 }
-
+// Click on a pattern
 var el = document.getElementsByClassName("pattern");
 for (var i = 0; i < el.length; i++) {
   el[i].onclick = changePattern;

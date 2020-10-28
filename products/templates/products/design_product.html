@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid product_design_container">
     <div class="row">
-        <div id="container" class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-1">
+        <div id="container" class="col-12 col-md-8 offset-md-2 col-lg-6  offset-lg-0">
             <!--SVG layer-->
             <svg id="product-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 version="1.1" preserveAspectRatio="xMidYMid meet"
@@ -36,47 +36,86 @@
             {% if product.image_lock %}
             <img id="lock_image" class="card-img-top img-fluid" src="{{ product.image_lock.url }}" alt="Lock">
             {% endif %}
+            <!--Input text -->
+            <div id="text_area_div">
+                <textarea id="textarea">INPUT TEXT HERE</textarea>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6">
+            <!--Options - colors-->
+            <div id="colors_title" class="titles"> Choose a color </div>
+            <div class="colors">
+                {% for color in colors %}
+                <div class="color" data-hex="{{color.hex_value}}"></div>
+                {% endfor %}
+            </div>
+            <!--Options - patterns-->
+            <div id="patterns_title" class="titles"> Choose a pattern </div>
+            <div class="patterns">
+                {% for pattern in patterns %}
+                <div class="pattern" id="{{ pattern.sku }}" title="{{ pattern.href }}"></div>
+                {% endfor %}
+            </div>
+            <!--Change font-size-->
+            <div id="text_title" class="titles"> Insert text </div>
+            <div id="text_options">
+                <div class="slide_container">
+                    <p>Change font size: </p>
+                    <input id="font_slide" type="range" min="1" max="200" value="50">
+                </div>
+                <!--Change font-family-->
+                <div class="font_family">
+                    <label for="font_family">Choose a font-family: </label>
+                    <select name="font_family" id="font_family">
+                        <option value="Amatic SC" style="font-family: 'Amatic SC', cursive"> Amatic SC</option>
+                        <option value="Dancing Script" style="font-family: 'Dancing Script', cursive;">Dancing Script
+                        </option>
+                        <option value="Homemade Apple" style="font-family: 'Homemade Apple', cursive;">Homemade Apple
+                        </option>
+                        <option value="Sacramento" style="font-family: 'Sacramento', cursive;">Sacramento</option>
+                        <option value="Satisfy" style="font-family: 'Satisfy', cursive;">Satisfy</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="decorations_title" class="titles"> Choose a decoration </div>
+            <div id="decoration_options">
+                <div class="decorations">
+                    <img class="decoration"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcStI4O_4hwuKCTQC7QuOWlEI1gW8A0J7u29Sw&usqp=CAU"
+                        alt="">
+                </div>
+                    <div>
+                        <p>Change the size of the image: </p>
+                        <input id="image_size_slide" type="range" min="1" max="1000" value="200">
+                    </div>
+                    <div>
+                        <p>Change the skew of the image: </p>
+                        <input id="image_skew_slide" type="range" min="-50" max="50" value="1">
+                    </div>
+                    <div>
+                        <p>Rotate image (X): </p>
+                        <input id="image_rotateX_slide" type="range" min="-180" max="0" value="0">
+                    </div>
+                    <div>
+                        <p>Rotate image (Y): </p>
+                        <input id="image_rotateY_slide" type="range" min="-180" max="0" value="0">
+                    </div>
+                    <div>
+                        <p>Rotate image (Z): </p>
+                        <input id="image_rotateZ_slide" type="range" min="-180" max="0" value="0">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    {% endblock %}
 
-<!--Options - colors-->
-<div class="colors">
-    {% for color in colors %}
-    <div class="color" data-hex="{{color.hex_value}}"></div>
-    {% endfor %}
-</div>
-<!--Options - patterns-->
-<div class="patterns">
-    {% for pattern in patterns %}
-    <div class="pattern" id="{{ pattern.sku }}" title="{{ pattern.href }}"></div>
-    {% endfor %}
-</div>
-<!--Change font-size-->
-<div class="slide_container">
-    <p>Change font size: </p>
-    <input id="font_slide" type="range" min="1" max="200" value="50">
-</div>
-<!--Change font-family-->
-<div class="font_family">
-    <label for="font_family">Choose a font-family: </label>
-    <select name="font_family" id="font_family">
-        <option value="Amatic SC" style="font-family: 'Amatic SC', cursive"> Amatic SC</option>
-        <option value="Dancing Script" style="font-family: 'Dancing Script', cursive;">Dancing Script</option>
-        <option value="Homemade Apple" style="font-family: 'Homemade Apple', cursive;">Homemade Apple</option>
-        <option value="Sacramento" style="font-family: 'Sacramento', cursive;">Sacramento</option>
-        <option value="Satisfy" style="font-family: 'Satisfy', cursive;">Satisfy</option>
-    </select>
-</div>
-<!--Input text -->
-<div id="text_area_div">
-    <textarea id="textarea">Input text</textarea>
-</div>
-{% endblock %}
-
-{% block postloadjs %}
-<script src="{% static 'js/apply_design.js' %}"></script>
-<script src="{% static 'js/set_backgrounds.js' %}"></script>
-<script src="{% static 'js/resize_edit_text.js' %}"></script>
-
-{% endblock %}
+    {% block postloadjs %}
+    <script src="{% static 'js/apply_design.js' %}"></script>
+    <script src="{% static 'js/set_backgrounds.js' %}"></script>
+    <script src="{% static 'js/edit_options.js' %}"></script>
+    <script src="{% static 'js/sliding.js' %}"></script>
+    {% endblock %}
