@@ -59,6 +59,10 @@ body, html {
   height: auto;
 }
 
+ .colors, .patterns{
+  padding: 2vh;
+}
+
 .color, .pattern {
   margin-left: 0.5em;
   border-radius: 18px;
@@ -93,6 +97,12 @@ textarea {
   background: transparent;
   border: transparent;
   margin: 10px;
+  font-size: 30px;
+}
+#close {
+  display: none;
+  padding:2px 5px;
+  background:#ccc;
 }
 
 .decorations {

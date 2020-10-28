@@ -38,11 +38,10 @@
             {% endif %}
             <!--Input text -->
             <div id="text_area_div">
+                <span id="close">x</span>
                 <textarea id="textarea">INPUT TEXT HERE</textarea>
             </div>
         </div>
-
-
         <div class="col-lg-6">
             <!--Options - colors-->
             <div id="colors_title" class="titles"> Choose a color </div>
@@ -59,7 +58,7 @@
                 {% endfor %}
             </div>
             <!--Change font-size-->
-            <div id="text_title" class="titles"> Insert text </div>
+            <div id="text_title" class="titles"> Add or edit text </div>
             <div id="text_options">
                 <div class="slide_container">
                     <p>Change font size: </p>
@@ -69,6 +68,7 @@
                 <div class="font_family">
                     <label for="font_family">Choose a font-family: </label>
                     <select name="font_family" id="font_family">
+                        <option> ----- </option>
                         <option value="Amatic SC" style="font-family: 'Amatic SC', cursive"> Amatic SC</option>
                         <option value="Dancing Script" style="font-family: 'Dancing Script', cursive;">Dancing Script
                         </option>
