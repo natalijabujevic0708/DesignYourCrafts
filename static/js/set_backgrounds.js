@@ -19,5 +19,15 @@ function patterns_background() {
     }
 
 }
+
+function decorations_background() {
+    const decorations = document.getElementsByClassName("decoration");
+    for (i = 0; i < decorations.length; i++) {
+        this_el = document.getElementsByClassName("decoration")[i]
+        href_value = this_el.getAttribute("title");
+        this_el.style.background = `url(${href_value})`;
+    }
+}
+decorations_background()
 colors_background()
 patterns_background()

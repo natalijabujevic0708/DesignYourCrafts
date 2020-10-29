@@ -36,6 +36,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class Decoration(models.Model):
+    sku = models.CharField(max_length=254, null=True, blank=True)
+    href = models.CharField(max_length=1000, null=True, blank=True)
+
 class Pattern(models.Model):
     sku = models.CharField(max_length=254, null=True, blank=True)
     href = models.CharField(max_length=1000, null=True, blank=True)

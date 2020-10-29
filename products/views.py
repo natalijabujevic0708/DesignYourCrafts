@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Color, Pattern
+from .models import Product, Color, Pattern, Decoration
 
 # Create your views here.
 def all_products(request):
@@ -21,11 +21,13 @@ def design_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     colors = Color.objects.all()
     patterns = Pattern.objects.all()
+    decorations = Decoration.objects.all()
 
     context = {
         'product': product,
         'colors': colors,
         'patterns': patterns,
+        'decorations' : decorations
     }
 
     return render(request, 'products/design_product.html', context) 

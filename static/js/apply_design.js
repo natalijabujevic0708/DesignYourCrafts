@@ -28,5 +28,18 @@ function changePattern(e) {
   overlay.style.fill = `url(#${url_pattern})`;
 }
 
+// Click on a decoration
+var el = document.getElementsByClassName("decoration");
+for (var i = 0; i < el.length; i++) {
+  el[i].onclick = applyDecoration;
+}
+
+function applyDecoration(e) {
+  // get the url
+  let src_decoration = e.target.getAttribute("title");
+  // display decoration
+  document.getElementsByClassName("chosen_decoration")[0].src = src_decoration;
+  document.getElementById("chosen_decoration_div").style.display = "block";
+}
 
 

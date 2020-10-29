@@ -11,6 +11,6 @@ $(document).ready(function () {
         $("#text_area_div").show()
     });
     $("#decorations_title").click(function () {
-        $("#decoration_options").slideToggle("slow");
+        $("#decorations").slideToggle("slow");
     });
 });

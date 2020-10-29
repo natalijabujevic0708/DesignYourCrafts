@@ -38,8 +38,13 @@
             {% endif %}
             <!--Input text -->
             <div id="text_area_div">
-                <span id="close">x</span>
+                <span id="close_textarea" class="close">x</span>
                 <textarea id="textarea">INPUT TEXT HERE</textarea>
+            </div>
+            <!-- Decoration-->
+            <div id="chosen_decoration_div">
+                <span id="close_decoration" class="close">x</span>
+                <img class="chosen_decoration" src="" alt="Chosen Decoration">
             </div>
         </div>
         <div class="col-lg-6">
@@ -79,43 +84,41 @@
                     </select>
                 </div>
             </div>
-
+            <!--Options - decorations -->
             <div id="decorations_title" class="titles"> Choose a decoration </div>
-            <div id="decoration_options">
-                <div class="decorations">
-                    <img class="decoration"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcStI4O_4hwuKCTQC7QuOWlEI1gW8A0J7u29Sw&usqp=CAU"
-                        alt="">
+            <div id="decorations">
+                {% for decoration in decorations %}
+                <div class="decoration" id="{{ decoration.sku }}" title="{{ decoration.href }}"></div>
+                {% endfor %}
+                <div>
+                    <p>Change the size of the image: </p>
+                    <input id="image_size_slide" type="range" min="1" max="1000" value="200">
                 </div>
-                    <div>
-                        <p>Change the size of the image: </p>
-                        <input id="image_size_slide" type="range" min="1" max="1000" value="200">
-                    </div>
-                    <div>
-                        <p>Change the skew of the image: </p>
-                        <input id="image_skew_slide" type="range" min="-50" max="50" value="1">
-                    </div>
-                    <div>
-                        <p>Rotate image (X): </p>
-                        <input id="image_rotateX_slide" type="range" min="-180" max="0" value="0">
-                    </div>
-                    <div>
-                        <p>Rotate image (Y): </p>
-                        <input id="image_rotateY_slide" type="range" min="-180" max="0" value="0">
-                    </div>
-                    <div>
-                        <p>Rotate image (Z): </p>
-                        <input id="image_rotateZ_slide" type="range" min="-180" max="0" value="0">
-                    </div>
+                <div>
+                    <p>Change the skew of the image: </p>
+                    <input id="image_skew_slide" type="range" min="-50" max="50" value="1">
+                </div>
+                <div>
+                    <p>Rotate image (X): </p>
+                    <input id="image_rotateX_slide" type="range" min="-180" max="0" value="0">
+                </div>
+                <div>
+                    <p>Rotate image (Y): </p>
+                    <input id="image_rotateY_slide" type="range" min="-180" max="0" value="0">
+                </div>
+                <div>
+                    <p>Rotate image (Z): </p>
+                    <input id="image_rotateZ_slide" type="range" min="-180" max="0" value="0">
                 </div>
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
 
-    {% block postloadjs %}
-    <script src="{% static 'js/apply_design.js' %}"></script>
-    <script src="{% static 'js/set_backgrounds.js' %}"></script>
-    <script src="{% static 'js/edit_options.js' %}"></script>
-    <script src="{% static 'js/sliding.js' %}"></script>
-    {% endblock %}
+{% block postloadjs %}
+<script src="{% static 'js/apply_design.js' %}"></script>
+<script src="{% static 'js/set_backgrounds.js' %}"></script>
+<script src="{% static 'js/edit_options.js' %}"></script>
+<script src="{% static 'js/sliding.js' %}"></script>
+{% endblock %}
