@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Pattern, Color, Decoration
+from .models import Product, Category, Pattern, Decoration
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
@@ -22,11 +22,6 @@ class PatternAdmin(admin.ModelAdmin):
         'sku',
         'href',
     )
-class ColorAdmin(admin.ModelAdmin):
-    list_display = (
-        'sku',
-        'hex_value',
-    )
 class DecorationAdmin(admin.ModelAdmin):
     list_display = (
         'sku',
@@ -36,5 +31,4 @@ class DecorationAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Pattern, PatternAdmin)
-admin.site.register(Color, ColorAdmin)
 admin.site.register(Decoration, DecorationAdmin)
