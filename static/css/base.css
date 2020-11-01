@@ -41,7 +41,7 @@ body, html, .chosen_decoration, textarea {
   position: relative;
 }
 
-#lock_image, .colors, .patterns, .font_family, .slide_container, #text_area_div, .font_family, .decorations, #chosen_decoration_div {
+#lock_image, .patterns, .font_family, .slide_container, #text_area_div, .font_family, .decorations, #chosen_decoration_div {
   z-index: 3;
 }
 
@@ -50,7 +50,7 @@ body, html, .chosen_decoration, textarea {
   mix-blend-mode: multiply;
 }
 
-#product-shape {
+.product-shape {
   fill: #ebece3;
 }
 
@@ -62,38 +62,32 @@ body, html, .chosen_decoration, textarea {
   height: auto;
 }
 
-.colors, .patterns, #decorations, #chosen_decoration_div, #text_area_div, .titles {
+.patterns, #decorations, #chosen_decoration_div, #text_area_div, .titles {
   padding: 2vh;
 }
 
-.color, .pattern, .decoration {
+.pattern, .decoration {
   margin-left: 0.5em;
   border-radius: 18px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   border: 2px solid #aaa;
 }
 
-.color {
-  height: 36px;
-  width: 36px;
-}
-
-.color, .pattern, #text_area_div, .decoration, #chosen_decoration_div {
+.pattern, #text_area_div, .decoration, #chosen_decoration_div {
   cursor: pointer;
 }
 
 .pattern, .decoration {
   background-position: center;
-  background-size: contain;
   height: 100px;
   width: 100px;
 }
 
-.decoration {
+.decoration, .pattern {
   background-size: cover !important;
 }
 
-#text_area_div, .colors, .patterns, #text_options, #decoration_options, #chosen_decoration_div, .close {
+#text_area_div, .patterns, #text_options, #decoration_options, #chosen_decoration_div, .close, #decorations, .top_box, .bottom_box {
   display: none;
 }
 
@@ -103,6 +97,16 @@ textarea {
   border: transparent;
   margin: 10px;
   font-size: 30px;
+  /* Hide scrollbar */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+textarea::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+#text_area_div{
+  width: max-content;
 }
 
 .close {
@@ -119,4 +123,54 @@ textarea {
   text-align: center;
   font-size: 4vh;
   border: 1px solid black;
+}
+
+#box_full{
+  background: url('/media/full_box.ico') no-repeat center center;
+}
+#box_top{
+  background: url('/media/top_box.ico') no-repeat center center;
+}
+#box_bottom{
+  background: url('/media/bottom_box.ico') no-repeat center center;
+}
+.boxes{ 
+  height: 10vh; 
+}
+.border {
+  border: 5px blue solid;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }

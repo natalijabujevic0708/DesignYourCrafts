@@ -1,18 +1,15 @@
 // Apply the color or pattern to the svg element
 
-const overlay = document.getElementById("product-shape");
+const overlay = document.getElementsByClassName("active_svg");
 
-// Click on a color
-var el = document.getElementsByClassName("color", "pattern");
-for (var i = 0; i < el.length; i++) {
-  el[i].onclick = changeColor;
-}
-
-function changeColor(e) {
+function changeColor() {
   // get the hex color
-  let hex = e.target.getAttribute("data-hex");
-  // set the hex color
-  overlay.style.fill = hex;
+  var color = document.getElementById("color_picker").value
+
+  // Set the fill style
+  for (var i = 0; i < overlay.length; i++) {
+    overlay[i].style.fill = color;
+  }
 }
 // Click on a pattern
 var el = document.getElementsByClassName("pattern");
@@ -25,7 +22,9 @@ function changePattern(e) {
   let url_pattern = e.target.getAttribute("id");
 
   // set the url
-  overlay.style.fill = `url(#${url_pattern})`;
+  for (var i = 0; i < overlay.length; i++) {
+    overlay[i].style.fill = `url(#${url_pattern})`;
+  }
 }
 
 // Click on a decoration

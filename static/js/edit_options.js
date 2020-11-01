@@ -1,6 +1,12 @@
 //Draggable functionality
 $(function () {
     $('#text_area_div, .chosen_decoration').draggable()
+    $('#text_area_div').resizable()
+});
+
+// Show textarea
+$("#text_button").click(function () {
+    $("#text_area_div").show()
 });
 
 //Change font-size
@@ -29,7 +35,6 @@ $("#close_decoration").click(function () {
     $('#chosen_decoration_div').css("display", "none")
 });
 
-
 //Resize decoration
 $('#image_size_slide').on('input', function () {
     slide_value = parseInt($('#image_size_slide').val())
@@ -37,8 +42,7 @@ $('#image_size_slide').on('input', function () {
     $('.chosen_decoration').css("width", slide_value);
 });
 
-// Decorations edit
-
+// Rotation
 var transformX, transformY, transformZ, transformSkew
 transformY = 'rotateY(0deg)'
 transformX = 'rotateX(0deg)'

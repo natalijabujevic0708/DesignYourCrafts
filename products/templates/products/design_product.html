@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block content %}
 <div class="container-fluid product_design_container">
     <div class="row">
@@ -16,14 +17,20 @@
                         <image height="1" width="1" preserveAspectRatio="none" xlink:href="{{ pattern.href }}" />
                     </pattern>
                     {% endfor %}
-                    <path d="{{ product.svg_path }}" id="{{ product.svg_id }}" />
+                    <path d="{{ product.svg_path }}" id="{{ product.svg_id }}" class="full_box active_svg" />
+                    <path d="{{ product.top_svg_path }}" id="{{ product.top_svg_id }}" class="top_box" />
+                    <path d="{{ product.bottom_svg_path }}" id="{{ product.bottom_svg_id }}" class="bottom_box" />
                 </defs>
                 <g>
                     <g>
                         <g>
                             <g>
-                                <use id="product-shape" xlink:href="#{{ product.svg_id }}" opacity="1" stroke="#000000"
-                                    stroke-width="0" />
+                                <use xlink:href="#{{ product.svg_id }}" opacity="1" stroke="#000000" stroke-width="0"
+                                    class="full_box product-shape active_svg" />
+                                <use xlink:href="#{{ product.top_svg_id }}" opacity="1" stroke="#000000"
+                                    stroke-width="0" class="top_box product-shape" />
+                                <use xlink:href="#{{ product.bottom_svg_id }}" opacity="1" stroke="#000000"
+                                    stroke-width="0" class="bottom_box product-shape" />
                             </g>
                         </g>
                     </g>
@@ -48,23 +55,34 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <!--Options - colors-->
-            <div id="colors_title" class="titles"> Choose a color </div>
-            <div class="colors">
-                {% for color in colors %}
-                <div class="color" data-hex="{{color.hex_value}}"></div>
-                {% endfor %}
+            <p> Choose a part of the box to design </p>
+            <div class="row boxes">
+                <div class="col-4 border" id="box_full"></div>
+                <div class="col-4" id="box_top"></div>
+                <div class="col-4" id="box_bottom"></div>
             </div>
-            <!--Options - patterns-->
-            <div id="patterns_title" class="titles"> Choose a pattern </div>
-            <div class="patterns">
+            <!-- Tab links -->
+            <div class="tab">
+                <button class="tablinks" onclick="openEditOption(event, 'Color')">Color</button>
+                <button class="tablinks" onclick="openEditOption(event, 'Pattern')">Pattern</button>
+                <button id="text_button" class="tablinks" onclick="openEditOption(event, 'Text')">Text</button>
+                <button id="decoration_button" class="tablinks"
+                    onclick="openEditOption(event, 'Decoration')">Decoration</button>
+            </div>
+            <!-- Tab content -->
+             <!--Color-->
+            <div id="Color" class="tabcontent">
+                <input data-jscolor= "" id="color_picker" onchange=changeColor() >
+            </div>
+             <!--Pattern-->
+            <div id="Pattern" class="tabcontent patterns">
                 {% for pattern in patterns %}
                 <div class="pattern" id="{{ pattern.sku }}" title="{{ pattern.href }}"></div>
                 {% endfor %}
             </div>
-            <!--Change font-size-->
-            <div id="text_title" class="titles"> Add or edit text </div>
-            <div id="text_options">
+             <!--Text-->
+            <div id="Text" class="tabcontent">
+                <!--Change font-size-->
                 <div class="slide_container">
                     <p>Change font size: </p>
                     <input id="font_slide" type="range" min="1" max="200" value="50">
@@ -84,9 +102,8 @@
                     </select>
                 </div>
             </div>
-            <!--Options - decorations -->
-            <div id="decorations_title" class="titles"> Choose a decoration </div>
-            <div id="decorations">
+            <!-- Decorations -->
+            <div id="Decoration" class="tabcontent">
                 {% for decoration in decorations %}
                 <div class="decoration" id="{{ decoration.sku }}" title="{{ decoration.href }}"></div>
                 {% endfor %}
@@ -117,8 +134,10 @@
 {% endblock %}
 
 {% block postloadjs %}
+<script src="{% static 'js/jscolor.js' %}"></script>
 <script src="{% static 'js/apply_design.js' %}"></script>
 <script src="{% static 'js/set_backgrounds.js' %}"></script>
 <script src="{% static 'js/edit_options.js' %}"></script>
-<script src="{% static 'js/sliding.js' %}"></script>
+<script src="{% static 'js/design_tabs.js' %}"></script>
+<script src="{% static 'js/change_svg.js' %}"></script>
 {% endblock %}
