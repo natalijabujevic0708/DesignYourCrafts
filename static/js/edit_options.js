@@ -1,12 +1,16 @@
-//Draggable functionality
-$(function () {
-    $('#text_area_div, .chosen_decoration').draggable()
-    $('#text_area_div').resizable()
-});
-
-// Show textarea
+// Show textarea and make it draggable and resizable
 $("#text_button").click(function () {
-    $("#text_area_div").show()
+    $("#text_area_div").show().draggable().resizable()
+});
+// Close functionality for textarea
+$("#text_area_div").mouseenter(function () {
+    $('.close').css("visibility", "visible")
+});
+$("#text_area_div").mouseleave(function () {
+    $('.close').css("visibility", "hidden")
+});
+$("#close_textarea").click(function () {
+    $('#text_area_div').css("display", "none")
 });
 
 //Change font-size
@@ -21,25 +25,11 @@ $('#font_family').on('input', function () {
     $('#textarea').css("font-family", font_family_value);
 });
 
-// Close functionality
-$("#text_area_div, #chosen_decoration_div").mouseenter(function () {
-    $('.close').css("display", "inline-block")
-});
-$("#text_area_div, #chosen_decoration_div").mouseleave(function () {
-    $('.close').css("display", "none")
-});
-$("#close_textarea").click(function () {
-    $('#text_area_div').css("display", "none")
-});
-$("#close_decoration").click(function () {
-    $('#chosen_decoration_div').css("display", "none")
-});
-
 //Resize decoration
 $('#image_size_slide').on('input', function () {
     slide_value = parseInt($('#image_size_slide').val())
-    $('.chosen_decoration').css("height", slide_value);
-    $('.chosen_decoration').css("width", slide_value);
+    $('#active_decoration').css("height", slide_value);
+    $('#active_decoration').css("width", slide_value);
 });
 
 // Rotation
@@ -53,7 +43,7 @@ transformSkew = 'skew(0deg)'
 $('#image_skew_slide').on('input', function () {
     slide_value = parseInt($('#image_skew_slide').val())
     transformSkew = 'skew(' + slide_value + 'deg)';
-    $('.chosen_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
+    $('#active_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
     return transformSkew
 });
 
@@ -61,7 +51,7 @@ $('#image_skew_slide').on('input', function () {
 $('#image_rotateX_slide').on('input', function () {
     slide_value = parseInt($('#image_rotateX_slide').val())
     transformX = 'rotateX(' + slide_value + 'deg)';
-    $('.chosen_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
+    $('#active_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
     return transformX
 });
 
@@ -69,7 +59,7 @@ $('#image_rotateX_slide').on('input', function () {
 $('#image_rotateY_slide').on('input', function () {
     slide_value = parseInt($('#image_rotateY_slide').val())
     transformY = 'rotateY(' + slide_value + 'deg)';
-    $('.chosen_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
+    $('#active_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
     return transformY
 
 });
@@ -78,6 +68,7 @@ $('#image_rotateY_slide').on('input', function () {
 $('#image_rotateZ_slide').on('input', function () {
     slide_value = parseInt($('#image_rotateZ_slide').val())
     transformZ = 'rotateZ(' + slide_value + 'deg)';
-    $('.chosen_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
+    $('#active_decoration').css('transform', `${transformY} ${transformZ} ${transformSkew} ${transformX}`);
     return transformZ
 });
+

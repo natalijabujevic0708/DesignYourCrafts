@@ -5,7 +5,7 @@ body, html {
   padding: 0;
 }
 
-body, html, .chosen_decoration, textarea {
+body, html, textarea {
   height: 100%;
   width: 100%;
 }
@@ -37,12 +37,15 @@ body, html, .chosen_decoration, textarea {
   min-height: 60vh;
 }
 
-#container, #text_area_div, #chosen_decoration_div {
+#container, #text_area_div, .chosen_decoration_div {
   position: relative;
 }
 
-#lock_image, .patterns, .font_family, .slide_container, #text_area_div, .font_family, .decorations, #chosen_decoration_div {
+#lock_image, .patterns, .font_family, .slide_container, #text_area_div, .font_family, .decorations, .chosen_decoration_div {
   z-index: 3;
+}
+#active_decoration_div{
+  z-index: 4;
 }
 
 #product-svg {
@@ -62,7 +65,7 @@ body, html, .chosen_decoration, textarea {
   height: auto;
 }
 
-.patterns, #decorations, #chosen_decoration_div, #text_area_div, .titles {
+.patterns, #decorations, .chosen_decoration_div, #text_area_div, .titles {
   padding: 2vh;
 }
 
@@ -73,7 +76,7 @@ body, html, .chosen_decoration, textarea {
   border: 2px solid #aaa;
 }
 
-.pattern, #text_area_div, .decoration, #chosen_decoration_div {
+.pattern, #text_area_div, .decoration, .chosen_decoration_div {
   cursor: pointer;
 }
 
@@ -87,7 +90,7 @@ body, html, .chosen_decoration, textarea {
   background-size: cover !important;
 }
 
-#text_area_div, .patterns, #text_options, #decoration_options, #chosen_decoration_div, .close, #decorations, .top_box, .bottom_box {
+#text_area_div, .patterns, #text_options, #decoration_options, #decorations, .top_box, .bottom_box {
   display: none;
 }
 
@@ -105,13 +108,21 @@ textarea::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
 }
 
-#text_area_div{
+#text_area_div, .chosen_decoration_div{
   width: max-content;
 }
+#text_area_div:hover , .chosen_decoration_div:hover {
+  border: 1px solid black;
+}
 
-.close {
+.chosen_decoration_div img{
+  width: 30vw;
+}
+
+.close, #active_decoration_div span {
   padding: 2px 5px;
   background: #ccc;
+  visibility: hidden;
 }
 
 .decorations {
@@ -125,15 +136,6 @@ textarea::-webkit-scrollbar {
   border: 1px solid black;
 }
 
-#box_full{
-  background: url('/media/full_box.ico') no-repeat center center;
-}
-#box_top{
-  background: url('/media/top_box.ico') no-repeat center center;
-}
-#box_bottom{
-  background: url('/media/bottom_box.ico') no-repeat center center;
-}
 .boxes{ 
   height: 10vh; 
 }
