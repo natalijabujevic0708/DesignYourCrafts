@@ -9,11 +9,11 @@
             <!--SVG layer-->
             <svg id="product-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 version="1.1" preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 {{ product.viewBox_width }} {{ product.viewBox_height }}" width="{{ product.svg_width }}"
+                viewBox="0 0 {{ product.svg_width }} {{ product.svg_height }}" width="{{ product.svg_width }}"
                 height="{{ product.svg_height }}">
                 <defs>
                     {% for pattern in patterns %}
-                    <pattern id="{{ pattern.sku }}" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+                    <pattern id="{{ pattern.id }}" height="100%" width="100%" patternContentUnits="objectBoundingBox">
                         <image height="1" width="1" preserveAspectRatio="none" xlink:href="{{ pattern.href }}" />
                     </pattern>
                     {% endfor %}
@@ -49,17 +49,20 @@
                 <textarea id="textarea">INPUT TEXT HERE</textarea>
             </div>
             <!-- Decoration-->
-            <div id="chosen_decoration_div">
-                <span id="close_decoration" class="close">x</span>
-                <img class="chosen_decoration" src="" alt="Chosen Decoration">
+            <div id="decoration_container">
+                <div class="chosen_decoration_div" id="original_decoration_div">
+                </div>
             </div>
         </div>
         <div class="col-lg-6">
-            <p> Choose a part of the box to design </p>
+            <p> Choose an area to design </p>
             <div class="row boxes">
-                <div class="col-4 border" id="box_full"></div>
-                <div class="col-4" id="box_top"></div>
-                <div class="col-4" id="box_bottom"></div>
+                <div class="col-4 border" id="box_full"
+                    style="background: url('{{ product.icon.icon_full.url }}')  no-repeat center center;"></div>
+                <div class=" col-4" id="box_top"
+                    style="background: url('{{ product.icon.icon_top.url }}')  no-repeat center center;"></div>
+                <div class="col-4" id="box_bottom"
+                    style="background: url('{{product.icon.icon_bottom.url }}')  no-repeat center center;"></div>
             </div>
             <!-- Tab links -->
             <div class="tab">
@@ -70,17 +73,17 @@
                     onclick="openEditOption(event, 'Decoration')">Decoration</button>
             </div>
             <!-- Tab content -->
-             <!--Color-->
+            <!--Color-->
             <div id="Color" class="tabcontent">
-                <input data-jscolor= "" id="color_picker" onchange=changeColor() >
+                <input data-jscolor="" id="color_picker" onchange=changeColor()>
             </div>
-             <!--Pattern-->
+            <!--Pattern-->
             <div id="Pattern" class="tabcontent patterns">
                 {% for pattern in patterns %}
-                <div class="pattern" id="{{ pattern.sku }}" title="{{ pattern.href }}"></div>
+                <div class="pattern" id="{{ pattern.id }}" title="{{ pattern.href }}"></div>
                 {% endfor %}
             </div>
-             <!--Text-->
+            <!--Text-->
             <div id="Text" class="tabcontent">
                 <!--Change font-size-->
                 <div class="slide_container">
@@ -105,7 +108,10 @@
             <!-- Decorations -->
             <div id="Decoration" class="tabcontent">
                 {% for decoration in decorations %}
-                <div class="decoration" id="{{ decoration.sku }}" title="{{ decoration.href }}"></div>
+
+                <img class="decoration" id="{{ decoration.id }}" src="{{ decoration.decoration_image.url }}"
+                    alt="Decoration">
+
                 {% endfor %}
                 <div>
                     <p>Change the size of the image: </p>
