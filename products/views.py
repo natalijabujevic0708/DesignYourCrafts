@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Pattern, Decoration
+from .models import Product, Pattern, Decoration, Icon
 
 
 
@@ -23,11 +23,14 @@ def design_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     patterns = Pattern.objects.all()
     decorations = Decoration.objects.all()
+    icons = Icon.objects.all()
+
 
     context = {
         'product': product,
         'patterns': patterns,
-        'decorations': decorations
+        'decorations': decorations,
+        'icons' : icons
     }
 
     return render(request, 'products/design_product.html', context)
