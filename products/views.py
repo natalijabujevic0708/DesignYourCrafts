@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, Pattern, Decoration, Icon
 
 
-
 # Create your views here.
 def all_products(request):
     """ A view to show all products """
@@ -25,12 +24,11 @@ def design_product(request, product_id):
     decorations = Decoration.objects.all()
     icons = Icon.objects.all()
 
-
     context = {
         'product': product,
         'patterns': patterns,
         'decorations': decorations,
-        'icons' : icons
+        'icons': icons
     }
 
     return render(request, 'products/design_product.html', context)

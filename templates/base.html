@@ -15,7 +15,9 @@
     {% endblock %}
 
     {% block corecss %}
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dancing+Script&family=Homemade+Apple&family=Sacramento&family=Satisfy&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Dancing+Script&family=Homemade+Apple&family=Sacramento&family=Satisfy&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -75,6 +77,19 @@
                     <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
                     <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
                     {% endif %}
+                    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
+                    href="{% url 'view_bag' %}">
+                    <div class="text-center">
+                        <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                        <p class="my-0">
+                            {% if grand_total %}
+                            ${{ grand_total|floatformat:2 }}
+                            {% else %}
+                            $0.00
+                            {% endif %}
+                        </p>
+                    </div>
+                </a>
                 </div>
             </li>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -121,6 +136,21 @@
                             <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
                             {% endif %}
                         </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
+                            href="{% url 'view_bag' %}">
+                            <div class="text-center">
+                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                                <p class="my-0">
+                                    {% if grand_total %}
+                                    ${{ grand_total|floatformat:2 }}
+                                    {% else %}
+                                    $0.00
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </div>
