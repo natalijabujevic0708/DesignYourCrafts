@@ -55,6 +55,25 @@
             </div>
         </div>
         <div class="col-lg-6">
+            <form action="{% url 'add_to_bag' product.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-12">
+                        <p class="mt-3"><strong>Quantity:</strong></p>
+                        <div class="form-group w-50">
+                            <div class="input-group">
+                                <input class="form-control" type="number" name="quantity" value="1" min="1" max="99"
+                                    data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <input type="submit" class="btn btn-primary" value="Add to Bag" id="submit_button">
+                    </div>
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <input type="hidden" name="region" id="region_value">
+                </div>
+            </form>
             <p> Choose an area to design </p>
             <div class="row boxes">
                 <div class="col-4 border" id="box_full"
@@ -134,23 +153,6 @@
                     <input id="image_rotateZ_slide" type="range" min="-180" max="0" value="0">
                 </div>
             </div>
-            <form action="{% url 'add_to_bag' product.id %}" method="POST">
-                {% csrf_token %}
-                <div class="form-row">
-                    <div class="col-12">
-                        <p class="mt-3"><strong>Quantity:</strong></p>
-                        <div class="form-group w-50">
-                            <div class="input-group">
-                                <input class="form-control" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <input type="submit" class="btn btn-primary" value="Add to Bag">
-                    </div>
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                </div>
-            </form>
         </div>
     </div>
 </div>
@@ -163,4 +165,15 @@
 <script src="{% static 'js/edit_options.js' %}"></script>
 <script src="{% static 'js/design_tabs.js' %}"></script>
 <script src="{% static 'js/change_svg.js' %}"></script>
+<script type="text/javascript">
+    $( document ).ready(function () {
+        var x = $("#product-svg").offset();
+        var height = $("#product-svg").height()
+        var width = $("#product-svg").width()
+        // Add 80px to take in consideration the height of the header
+        var region = (`${x.left}, ${x.top+80}, ${width}, ${height-80}`)
+        $('#region_value').val(region)
+
+    });
+</script>
 {% endblock %}
