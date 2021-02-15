@@ -1,16 +1,40 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Product, Pattern, Decoration, Icon
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.contrib import messages
+from django.db.models import Q
+from .models import Product, Pattern, Decoration, Icon, Category
 
 
 # Create your views here.
-def all_products(request):
-    """ A view to show all products """
-
-    products = Product.objects.all()
+def product_categories(request):
+    """ A view to show product categories """
+    categories = Category.objects.all()
 
     context = {
-        'products': products,
+        'current_categories': categories,
+    }
 
+    return render(request, 'products/product_categories.html', context)
+
+
+def all_products(request):
+    """ A view to show products """
+
+    products = Product.objects.all()
+    query = None
+    if 'category' in request.GET:
+        categories = [request.GET['category']]
+        products = products.filter(category__name__in=categories)
+    if 'q' in request.GET:
+        query = request.GET['q']
+        if not query:
+            messages.error(request, "You didn't enter any search criteria!")
+            return redirect(reverse('products'))
+
+        queries = Q(name__icontains=query) | Q(description__icontains=query)
+        products = products.filter(queries)
+    context = {
+        'products': products,
+        'search_term': query,
     }
 
     return render(request, 'products/products.html', context)

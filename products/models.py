@@ -27,7 +27,7 @@ class Icon(models.Model):
 
 class Product(models.Model):
     """Model representing a Product. It is connected by a foreign key to
-    Category. Optional Fields: sku, image_lock. """
+    Category and Icon. Optional Fields: sku, image_lock. """
 
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
