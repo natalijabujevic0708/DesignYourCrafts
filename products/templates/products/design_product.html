@@ -166,12 +166,13 @@
 <script src="{% static 'js/design_tabs.js' %}"></script>
 <script src="{% static 'js/change_svg.js' %}"></script>
 <script type="text/javascript">
-    $( document ).ready(function () {
+    $('.toast').toast('show');
+    $(document).ready(function () {
         var x = $("#product-svg").offset();
         var height = $("#product-svg").height()
         var width = $("#product-svg").width()
         // Add 80px to take in consideration the height of the header
-        var region = (`${x.left}, ${x.top+80}, ${width}, ${height-80}`)
+        var region = (`${x.left}, ${x.top + 80}, ${width}, ${height - 80}`)
         $('#region_value').val(region)
 
     });
