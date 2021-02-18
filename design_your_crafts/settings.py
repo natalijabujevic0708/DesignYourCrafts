@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'home',
     'products',
-    'bag'
+    'bag',
+    'checkout',
 
 ]
 
@@ -111,7 +112,7 @@ WSGI_APPLICATION = 'design_your_crafts.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
     }
 }
 
