@@ -122,7 +122,6 @@ textarea::-webkit-scrollbar {
 .close, #active_decoration_div span {
   padding: 2px 5px;
   background: #ccc;
-  visibility: hidden;
 }
 
 .decorations {
