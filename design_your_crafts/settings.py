@@ -26,9 +26,9 @@ SECRET_KEY = config('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = True
 
-ALLOWED_HOSTS = ['design-your-crafts.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['design-your-crafts.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
