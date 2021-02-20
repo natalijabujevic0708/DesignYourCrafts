@@ -1,1 +1,1 @@
-web: gunicorn design_your_crafts.wsgi
+web: gunicorn design_your_crafts.wsgi:application
