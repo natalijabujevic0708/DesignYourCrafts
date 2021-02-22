@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in prodution!
 DEBUG = True
 
-ALLOWED_HOSTS = ['design-your-crafts.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['design-your-crafts.herokuapp.com', 'localhost']
 
 
 # Application definition
