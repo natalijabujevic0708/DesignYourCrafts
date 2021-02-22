@@ -1,4 +1,4 @@
-import io, sys, pyautogui
+import io, sys
 
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -27,7 +27,7 @@ def add_to_bag(request, item_id):
     # Take a screenshot of the product with the defined region
     list_region_values = region_value.split(", ")
     region_value = [float(i) for i in list_region_values]
-    image_design = pyautogui.screenshot(region=tuple(region_value))
+    #image_design = pyautogui.screenshot(region=tuple(region_value))
 
     # Convert the image to fileupload object 
     image_design_io = io.BytesIO()
