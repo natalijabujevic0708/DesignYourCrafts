@@ -1,4 +1,5 @@
 import io, sys
+import pyautogui
 
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -24,17 +25,19 @@ def add_to_bag(request, item_id):
     redirect_url = request.POST.get('redirect_url')
     region_value = request.POST.get('region')
     
-    # Take a screenshot of the product with the defined region
+   # Take a screenshot of the product with the defined region
     list_region_values = region_value.split(", ")
     region_value = [float(i) for i in list_region_values]
-    #image_design = pyautogui.screenshot(region=tuple(region_value))
+    image_design = pyautogui.screenshot(region=tuple(region_value))
+    image_design.save('save.png', format='JPEG')
+
+
 
     # Convert the image to fileupload object 
     image_design_io = io.BytesIO()
     image_design.save(image_design_io, format='JPEG')
     image_design_file = InMemoryUploadedFile(image_design_io, None, product.name, 'image/jpeg',
                                   sys.getsizeof(image_design_io), None)
-    
 
     # Save the data in to Design model
     design= Design(product=product, design_image=image_design_file)
@@ -44,6 +47,7 @@ def add_to_bag(request, item_id):
     bag = request.session.get('bag', {})
     bag[item_id] = [quantity, design.pk]
     request.session['bag'] = bag
+    print(request.session['bag'])
     
     messages.success(request, f'Added {product.name} to your bag')
     return redirect(redirect_url)
