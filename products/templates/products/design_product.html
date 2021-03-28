@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<div class="container-fluid product_design_container">
+<div class="container-fluid product_design_container" >
     <div class="row">
         <div id="container" class="col-12 col-md-8 offset-md-2 col-lg-6  offset-lg-0">
             <!--SVG layer-->
@@ -46,7 +46,7 @@
             <!--Input text -->
             <div id="text_area_div">
                 <span id="close_textarea" class="close">x</span>
-                <textarea id="textarea">INPUT TEXT HERE</textarea>
+                <textarea id="textarea" style="font-family: 'Times New Roman'">INPUT TEXT HERE</textarea>
             </div>
             <!-- Decoration-->
             <div id="decoration_container">
@@ -77,7 +77,7 @@
                         <input type="submit" class="btn btn-primary" value="Add to Bag" id="submit_button">
                     </div>
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                    <input type="hidden" name="region" id="region_value">
+                    <input type="hidden" name="design_id" id="design_id" value="{{design_id}}">
                 </div>
             </form>
             <p> Choose an area to design </p>
@@ -173,14 +173,57 @@
 <script src="{% static 'js/change_svg.js' %}"></script>
 <script type="text/javascript">
     $('.toast').toast('show');
-    $(document).ready(function () {
-        var x = $("#product-svg").offset();
-        var height = $("#product-svg").height()
-        var width = $("#product-svg").width()
-        // Add 80px to take in consideration the height of the header
-        var region = (`${x.left}, ${x.top + 80}, ${width}, ${height - 80}`)
-        $('#region_value').val(region)
-        
-    });
+    
+    $('#submit_button').click(function () {
+        // Get the ID of the design
+        design_id = $('#design_id').attr('value')
+        design_details = {}
+        // Get the part of the item and the pattern/colour
+        $('path').filter(function () {
+            if ($(this).css('display') == 'inline') {
+                // if the fill is black add opacity 0
+                if($(this).css('fill')==='rgb(0, 0, 0)'){
+                    design_details[$(this).attr("class")] = 'rgb(0, 0, 0, 0)'
+                }else{
+                    design_details[$(this).attr("class")] = $(this).css('fill')
+                }
+                
+            }
+        })
+        // Width and height of the parent div
+        design_details["container_width"]= $('#product-svg').width()
+        design_details["container_height"] = $('#product-svg').height()
+        // If the textarea is selected get the relevant info and store it to local storage
+        if ($(text_area_div).css('display') == 'block') {
+            // Text content
+            design_details["textarea_text"] = $('#textarea').val()
+            // Top and left offset
+            design_details["textarea_top"] = $('#text_area_div').offset().top - $('#product-svg').offset().top
+            design_details["textarea_left"] = $('#text_area_div').offset().left - $('#product-svg').offset().left
+            // Font-size and font-family
+            design_details["font_size"] = $("#textarea").css('font-size')
+            design_details["font-family"]= $("#textarea").css('font-family')
+        }
+        // If the decoration is selected get the relevant info and store it to local storage
+        if ($(".chosen_decoration_div:not(#original_decoration_div)").css('display') == 'block') {
+            // Loop through each decoration
+            $(".chosen_decoration_div:not(#original_decoration_div)").each(function () {
+                // Image src
+                design_details["decoration_src"] = $(this).find('img').attr("src")
+                // Check if the style was modified
+                if ($(this).find('img').attr("style")) {
+                    design_details["decoration_style"] = $(this).find('img').attr("style")
+                }
+                design_details["decoration_width"]= $(this).find('img').width()
+                design_details["decoration_height"]= $(this).find('img').height()
+
+                // Top and left offset
+                design_details["decoration_top"]= $(this).find('img').offset().top - $('#product-svg').offset().top
+                design_details["decoration_left"]= $(this).find('img').offset().left - $('#product-svg').offset().left
+            })
+        }
+        localStorage.setItem(design_id, JSON. stringify(design_details))
+    })
+
 </script>
 {% endblock %}

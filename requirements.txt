@@ -14,9 +14,7 @@ idna==2.8
 jmespath==0.10.0
 oauthlib==3.1.0
 Pillow==6.2.2
-PyAutoGUI==0.9.52
 psycopg2-binary==2.8.6
-PyAutoGUI==0.9.52
 python-decouple==3.1
 python-xlib==0.20
 python3-openid==3.1.0

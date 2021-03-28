@@ -22,6 +22,7 @@ class Icon(models.Model):
     icon_full = models.ImageField(null=True)
     icon_top = models.ImageField(null=True)
     icon_bottom = models.ImageField(null=True)
+    
     def __str__(self):
         return self.name
 

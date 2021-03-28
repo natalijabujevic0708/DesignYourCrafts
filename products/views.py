@@ -1,3 +1,5 @@
+import uuid
+
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -70,12 +72,15 @@ def design_product(request, product_id):
     patterns = Pattern.objects.all()
     decorations = Decoration.objects.all()
     icons = Icon.objects.all()
+    design_id = uuid.uuid4().hex
+
 
     context = {
         'product': product,
         'patterns': patterns,
         'decorations': decorations,
-        'icons': icons
+        'icons': icons,
+        'design_id':design_id
     }
 
     return render(request, 'products/design_product.html', context)

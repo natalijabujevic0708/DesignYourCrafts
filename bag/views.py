@@ -1,13 +1,13 @@
 import io, sys
 import pyautogui
 
+
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib import messages
 
-from products.models import Product
-from .models import Design
-
+# from .models import Design
+from products.models import Product, Pattern, Decoration, Icon, Category
 
 def view_bag(request):
     """ A view to return the bag contents page """
@@ -16,38 +16,17 @@ def view_bag(request):
 
 
 def add_to_bag(request, item_id):
-    """ Add a product to the shopping bag.
-        Take a screenshot of the product and append it 
-        to the product details in the bag. """
+    """ Add a product to the shopping bag. """
     
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
-    region_value = request.POST.get('region')
-    
-   # Take a screenshot of the product with the defined region
-    list_region_values = region_value.split(", ")
-    region_value = [float(i) for i in list_region_values]
-    image_design = pyautogui.screenshot(region=tuple(region_value))
-    image_design.save('save.png', format='JPEG')
-
-
-
-    # Convert the image to fileupload object 
-    image_design_io = io.BytesIO()
-    image_design.save(image_design_io, format='JPEG')
-    image_design_file = InMemoryUploadedFile(image_design_io, None, product.name, 'image/jpeg',
-                                  sys.getsizeof(image_design_io), None)
-
-    # Save the data in to Design model
-    design= Design(product=product, design_image=image_design_file)
-    design.save()
+    design_id = request.POST.get('design_id')
     
     # Save the changes in the session
     bag = request.session.get('bag', {})
-    bag[item_id] = [quantity, design.pk]
+    bag[item_id] = [quantity, design_id]
     request.session['bag'] = bag
-    print(request.session['bag'])
     
     messages.success(request, f'Added {product.name} to your bag')
     return redirect(redirect_url)

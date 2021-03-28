@@ -26,13 +26,59 @@
                         </tr>
                     </thead>
                     {% for item in bag_items %}
-                    <tr>
-                        <td class="p-3 w-25">
-                            {% if item.product.image %}
-                            <img class="img-fluid rounded" src="{{ item.image_design }}" alt="{{ item.product.name }}">
-                            {% else %}
-                            <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                    <tr style="height:40vh" id="{{item.design_id}}">
+                        <td class="p-3 w-25" style="position:relative">
+                            <svg id="product-svg" xmlns="http://www.w3.org/2000/svg" style="position: absolute;"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                preserveAspectRatio="xMidYMid meet"
+                                viewBox="0 0 {{ item.product.svg_width }} {{ item.product.svg_height }}"
+                                width="{{ item.product.svg_width }}" height="{{ item.product.svg_height }}">
+                                <defs>
+                                    {% for pattern in patterns %}
+                                    <pattern id="{{ pattern.id }}" height="100%" width="100%"
+                                        patternContentUnits="objectBoundingBox">
+                                        <image height="1" width="1" preserveAspectRatio="none"
+                                            xlink:href="{{ pattern.href }}" />
+                                    </pattern>
+                                    {% endfor %}
+                                    <path d="{{ item.product.svg_path }}" id="{{ item.product.svg_id }}"
+                                        class="full_box" style="display: none;" />
+                                    <path d="{{ item.product.top_svg_path }}" id="{{ item.product.top_svg_id }}"
+                                        class="top_box" style="display: none;" />
+                                    <path d="{{ item.product.bottom_svg_path }}" id="{{ item.product.bottom_svg_id }}"
+                                        class="bottom_box" style="display: none;" />
+                                </defs>
+                                <g>
+                                    <g>
+                                        <g>
+                                            <g>
+                                                <use xlink:href="#{{ item.product.svg_id }}" opacity="1"
+                                                    stroke="#000000" stroke-width="0"
+                                                    class="full_box product-shape active_svg" />
+                                                <use xlink:href="#{{ item.product.top_svg_id }}" opacity="1"
+                                                    stroke="#000000" stroke-width="0" class="top_box product-shape" />
+                                                <use xlink:href="#{{ item.product.bottom_svg_id }}" opacity="1"
+                                                    stroke="#000000" stroke-width="0"
+                                                    class="bottom_box product-shape" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            <!--Background image-->
+                            <img id="background-image" class="img-fluid rounded" src="{{ item.image_design }}"
+                                alt="{{ product.name }}" style="width:auto; height:auto; position: absolute;">
+                            <!--Lock image-->
+                            {% if product.image_lock %}
+                            <img id="lock_image" class="img-fluid rounded" src="{{ item.product.image_lock.url }}"
+                                alt="Lock">
                             {% endif %}
+                            <!--Input text -->
+                            <div id="text_area_div">
+                                <textarea id="textarea">INPUT TEXT HERE</textarea>
+                            </div>
+                            <!-- Decoration-->
+                            <img id="decoration_img" style="display: none;">
                         </td>
                         <td class="py-3">
                             <p class="my-0"><strong>{{ item.product.name }}</strong></p>
@@ -54,7 +100,7 @@
                             </form>
                             <a class="update-link text-info"><small>Update</small></a>
                             <a class="remove-item text-danger float-right"
-                                id="remove_{{ item.item_id }}"><small>Remove</small></a>
+                                id="remove_{{ item.item_id }}" name={{item.design_id}}><small>Remove</small></a>
                         </td>
                         <td class="py-3">
                             <p class="my-0">${{ item.product.price | calc_subtotal:item.quantity }}</p>
@@ -109,6 +155,81 @@
 {% block postloadjs %}
 <script type="text/javascript">
     $('.toast').toast('show');
+    $('tr').each(function () {
+        if ($(this).attr("id")) {
+            design = JSON.parse(localStorage.getItem($(this).attr('id')))
+            // Check if there is a pattern or background colour
+            if (design['full_box active_svg']) {
+                $(this).find('.full_box').css({ 'fill': design['full_box active_svg'], 'display': 'inline' }).attr('class', 'full_box active_svg');
+            } else if (design['full_box']) {
+                $(this).find('.full_box').css({ 'fill':design['full_box'], 'display': 'inline' }).attr('class', 'full_box active_svg');
+            }
+            if (design['top_box active_svg']) {
+                $(this).find('.top_box').css({ 'fill': design['top_box active_svg'], 'display': 'inline' }).attr('class', 'top_box active_svg');
+            } else if (design['top_box']) {
+                $(this).find('.top_box').css({ 'fill': design['top_box'], 'display': 'inline' }).attr('class', 'top_box active_svg');
+            }
+            if (design['bottom_box active_svg']) {
+                $(this).find('.bottom_box').css({ 'fill': design['bottom_box active_svg'], 'display': 'inline' }).attr('class', 'bottom_box active_svg');
+            } else if (design['bottom_box']) {
+                $(this).find('.bottom_box').css({ 'fill': design['bottom_box'], 'display': 'inline' }).attr('class', 'bottom_box active_svg');
+            }
+            // If textarea was selected in the design, get the relevant info 
+            if (design['textarea_text']) {
+                $("#textarea").text(design['textarea_text'])
+                // Get the top and left offset with this calculation:
+                // minimized top offset = (minimized height/original height)*original top offset  
+                textarea_top = ($('#product-svg').height() / design['container_height']) * design['textarea_top']
+                // minimized left offset = (minimized width/original width)*original left offset  
+                textarea_left = ($('#product-svg').width() / design['container_width']) * design['textarea_left']
+
+                // Add the css properties to the text_area_div 
+                $('#text_area_div').css('display', 'block').css('position', 'absolute').css('top', `${textarea_top}px`).css('left', `${textarea_left}px`)
+
+                // Calculate font-size by removing the px part and calculating:
+                // minimazed font-size = original font size * (minimized width/original width)
+                font_size = (parseFloat((design['font_size'].slice(0, -2))) * ($('#product-svg').width() / design["container_width"])).toFixed()
+                $("#textarea").css('font-size', `${font_size}px`)
+
+                // Add font-family
+                $("#textarea").css('font-family', design["font-family"])
+
+            }
+            // If decoration was selected in the design, get the relevant info 
+            if (design["decoration_src"]) {
+                // Get the top and left offset with this calculation:
+                // minimized top offset = (minimized height/original height)*original top offset  
+                decoration_top = ($('#product-svg').height() / design["container_height"]) * design["decoration_top"]
+                // minimized left offset = (minimized width/original width)*original left offset  
+                decoration_left = ($('#product-svg').width() / design["container_width"]) * design["decoration_left"]
+
+                // Calculate height and width of the decoration:
+                // minimazed height = original height * (minimized height/original height)
+                decoration_height = (parseFloat(design["decoration_height"]) * ($('#product-svg').height() / design["container_height"])).toFixed()
+                // minimazed width = original height * (minimized height/original height)
+                decoration_width = (parseFloat(design["decoration_width"]) * ($('#product-svg').width() / design["container_width"])).toFixed()
+
+                // Add the css properties to the decoration image
+                all_css = { 'display': 'block', 'position': 'absolute', 'top': `${decoration_top}px`, 'left': `${decoration_left}px`, 'height': `${decoration_height}px`, 'width': `${decoration_width}px` }
+
+                // Check if the decoration was modified
+                if (design["decoration_style"]) {
+                    array_styles = design["decoration_style"].split(";")
+                    for (style of array_styles) {
+                        specific_style = style.split(':')
+                        // Height and width are already set
+                        if (($.trim(specific_style[0]) !== 'height') && ($.trim(specific_style[0]) !== 'width')) {
+                            this.all_css[specific_style[0]] = specific_style[1]
+                        }
+                    }
+                    $('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
+                } else {
+                    $('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
+                }
+            }
+        }
+    })
+
     // Update quantity on click
     $('.update-link').click(function (e) {
         var form = $(this).prev('.update-form');
@@ -121,7 +242,7 @@
         var itemId = $(this).attr('id').split('remove_')[1];
         var url = `/bag/remove/${itemId}/`;
         var data = { 'csrfmiddlewaretoken': csrfToken };
-
+        localStorage.removeItem($(this).attr('name'))
         $.post(url, data)
             .done(function () {
                 location.reload();

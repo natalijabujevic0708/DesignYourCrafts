@@ -1,9 +1,8 @@
-
 from decimal import Decimal
 from django.conf import settings
 from django.shortcuts import get_object_or_404
-from products.models import Product
-from .models import Design
+from products.models import Product,Pattern
+# from .models import Design
 
 
 def bag_contents(request):
@@ -12,10 +11,11 @@ def bag_contents(request):
     total = 0
     product_count = 0
     bag = request.session.get('bag', {})
+    patterns = Pattern.objects.all()
 
     for item_id, details in bag.items():
         product = get_object_or_404(Product, pk=item_id)
-        image_design = get_object_or_404(Design, pk=details[1])
+        
 
         total += details[0] * product.price
         product_count += details[0]
@@ -23,7 +23,8 @@ def bag_contents(request):
             'item_id': item_id,
             'quantity': details[0],
             'product': product,
-            'image_design': image_design.design_image.url
+            'image_design': product.image.url,
+            'design_id': details[1]
         })
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
@@ -36,6 +37,7 @@ def bag_contents(request):
     grand_total = delivery + total
     
     context = {
+        'patterns' : patterns,
         'bag_items': bag_items,
         'total': total,
         'product_count': product_count,
