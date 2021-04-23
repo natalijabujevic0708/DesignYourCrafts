@@ -2,78 +2,240 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
 {% endblock %}
 
 {% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4">My Profile</h2>
-                <hr>
+<div class="overlay"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <hr>
+            <h2 class="logo-font mb-4">My Profile</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <p class="text-muted">Default Delivery Information</p>
+            <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-black rounded-0 text-uppercase float-right">Update Information</button>
+            </form>
+        </div>
+        <div class="col-12 col-lg-6">
+            <p class="text-muted all_past_design" id="{{design_history}}">Order History</p>
+            <div class="order-history table-responsive">
+                <table class="table table-sm table-borderless">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Date</th>
+                            <th>Items</th>
+                            <th>Order Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                                    {{ order.order_number|truncatechars:6 }}
+                                </a>
+                            </td>
+                            <td>{{ order.date }}</td>
+                            <td>
+                                <ul class="list-unstyled">
+                                    {% for item in order.lineitems.all %}
+                                    <li class="small">
+                                        {{ item.product.name }} x{{ item.quantity }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>${{ order.grand_total }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-lg-6">
-                <p class="text-muted">Default Delivery Information</p>
-                <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button class="btn btn-black rounded-0 text-uppercase float-right">Update Information</button>
-                </form>
-            </div>
-            <div class="col-12 col-lg-6">
-                <p class="text-muted">Order History</p>
-                <div class="order-history table-responsive">
-                    <table class="table table-sm table-borderless">
+    </div>
+    <div class="container mb-2 my-5">
+        <div class="row" style="max-height: 50vh;overflow: scroll;">
+            <div class="col">
+                <div>
+                    <table class="table table-sm table-borderless all_past_design" id="{{design_history}}">
                         <thead>
                             <tr>
-                                <th>Order Number</th>
-                                <th>Date</th>
-                                <th>Items</th>
-                                <th>Order Total</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {% for order in orders %}
-                                <tr>
-                                    <td>
-                                        <a href="{% url 'order_history' order.order_number %}"
-                                        title="{{ order.order_number }}">
-                                            {{ order.order_number|truncatechars:6 }}
-                                        </a>
-                                    </td>
-                                    <td>{{ order.date }}</td>
-                                    <td>
-                                        <ul class="list-unstyled">
-                                            {% for item in order.lineitems.all %}
-                                                <li class="small">
-                                                    {{ item.product.name }} x{{ item.quantity }}
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </td>
-                                    <td>${{ order.grand_total }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
+                        {% for product in products %}
+                        <tr style="height:40vh" class="design_history">
+                            <td class="p-3 w-25" style="position:relative">
+                                <svg id="product-svg" xmlns="http://www.w3.org/2000/svg" style="position: absolute;"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    preserveAspectRatio="xMidYMid meet"
+                                    viewBox="0 0 {{ product.svg_width }} {{ product.svg_height }}"
+                                    width="{{ product.svg_width }}" height="{{ product.svg_height }}">
+                                    <defs>
+                                        {% for pattern in patterns %}
+                                        <pattern id="{{ pattern.id }}" height="100%" width="100%"
+                                            patternContentUnits="objectBoundingBox">
+                                            <image height="1" width="1" preserveAspectRatio="none"
+                                                xlink:href="{{ pattern.href }}" />
+                                        </pattern>
+                                        {% endfor %}
+                                        <path d="{{ product.svg_path }}" id="{{ product.svg_id }}" class="full_box"
+                                            style="display: none;" />
+                                        <path d="{{ product.top_svg_path }}" id="{{ product.top_svg_id }}"
+                                            class="top_box" style="display: none;" />
+                                        <path d="{{ product.bottom_svg_path }}" id="{{ product.bottom_svg_id }}"
+                                            class="bottom_box" style="display: none;" />
+                                    </defs>
+                                    <g>
+                                        <g>
+                                            <g>
+                                                <g>
+                                                    <use xlink:href="#{{ product.svg_id }}" opacity="1" stroke="#000000"
+                                                        stroke-width="0" class="full_box product-shape active_svg" />
+                                                    <use xlink:href="#{{ product.top_svg_id }}" opacity="1"
+                                                        stroke="#000000" stroke-width="0"
+                                                        class="top_box product-shape" />
+                                                    <use xlink:href="#{{ product.bottom_svg_id }}" opacity="1"
+                                                        stroke="#000000" stroke-width="0"
+                                                        class="bottom_box product-shape" />
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <!--Background image-->
+                                <img id="background-image" class="img-fluid rounded" src="{{ product.image.url }}"
+                                    alt="{{ product.name }}" style="width:auto; height:auto; position: absolute;">
+                                <!--Lock image-->
+                                {% if product.image_lock %}
+                                <img id="lock_image" class="img-fluid rounded" src="{{ product.image_lock.url }}"
+                                    alt="Lock">
+                                {% endif %}
+                                <!--Input text -->
+                                <div id="text_area_div">
+                                    <textarea id="textarea">INPUT TEXT HERE</textarea>
+                                </div>
+                                <!-- Decoration-->
+                                <img id="decoration_img" style="display: none;">
+                            </td>
+                        </tr>
+                        {% endfor %}
                     </table>
                 </div>
             </div>
         </div>
-{% endblock %}
+    </div>
+    {% endblock %}
 
-{% block postloadjs %}
+    {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
-{% endblock %} 
+    <script type="text/javascript">
+        // Get all past design from this user
+        $(document).ready(function () {
+            // Get the design that was passed as an id and transform it to array
+            let designs = JSON.parse($('.all_past_design').attr("id"))
+            // For every element loop through and find the matching design by the 
+            // bakground image
+            $('.design_history').each(function () {
+                for (design of designs) {
+                    if ($(this).find('#background-image').attr("src") == design["background_image"]) {
+                        place_in_array = designs.indexOf(design);
+                        // Remove the matching design so it doesn't repeat
+                        designs.splice(place_in_array, 1)
+                        // Check if there is a pattern or background colour
+                        if (design['full_box active_svg']) {
+                            $(this).find('.full_box').css({ 'fill': design['full_box active_svg'], 'display': 'inline' }).attr('class', 'full_box active_svg');
+                        } else if (design['full_box']) {
+                            $(this).find('.full_box').css({ 'fill': design['full_box'], 'display': 'inline' }).attr('class', 'full_box active_svg');
+                        }
+                        if (design['top_box active_svg']) {
+                            $(this).find('.top_box').css({ 'fill': design['top_box active_svg'], 'display': 'inline' }).attr('class', 'top_box active_svg');
+                        } else if (design['top_box']) {
+                            $(this).find('.top_box').css({ 'fill': design['top_box'], 'display': 'inline' }).attr('class', 'top_box active_svg');
+                        }
+                        if (design['bottom_box active_svg']) {
+                            $(this).find('.bottom_box').css({ 'fill': design['bottom_box active_svg'], 'display': 'inline' }).attr('class', 'bottom_box active_svg');
+                        } else if (design['bottom_box']) {
+                            $(this).find('.bottom_box').css({ 'fill': design['bottom_box'], 'display': 'inline' }).attr('class', 'bottom_box active_svg');
+                        }
+                        // If textarea was selected in the design, get the relevant info 
+                        if (design['textarea_text']) {
+                            $("#textarea").text(design['textarea_text'])
+                            // Get the top and left offset with this calculation:
+                            // minimized top offset = (minimized height/original height)*original top offset  
+                            textarea_top = ($('#product-svg').height() / design['container_height']) * design['textarea_top']
+                            // minimized left offset = (minimized width/original width)*original left offset  
+                            textarea_left = ($('#product-svg').width() / design['container_width']) * design['textarea_left']
+
+                            // Add the css properties to the text_area_div 
+                            $('#text_area_div').css('display', 'block').css('position', 'absolute').css('top', `${textarea_top}px`).css('left', `${textarea_left}px`)
+
+                            // Calculate font-size by removing the px part and calculating:
+                            // minimazed font-size = original font size * (minimized width/original width)
+                            font_size = (parseFloat((design['font_size'].slice(0, -2))) * ($('#product-svg').width() / design["container_width"])).toFixed()
+                            $("#textarea").css('font-size', `${font_size}px`)
+
+                            // Add font-family
+                            $("#textarea").css('font-family', design["font-family"])
+
+                        }
+                        // If decoration was selected in the design, get the relevant info 
+                        if (design["decoration_src"]) {
+                            // Get the top and left offset with this calculation:
+                            // minimized top offset = (minimized height/original height)*original top offset  
+                            decoration_top = ($('#product-svg').height() / design["container_height"]) * design["decoration_top"]
+                            // minimized left offset = (minimized width/original width)*original left offset  
+                            decoration_left = ($('#product-svg').width() / design["container_width"]) * design["decoration_left"]
+
+                            // Calculate height and width of the decoration:
+                            // minimazed height = original height * (minimized height/original height)
+                            decoration_height = (parseFloat(design["decoration_height"]) * ($('#product-svg').height() / design["container_height"])).toFixed()
+                            // minimazed width = original height * (minimized height/original height)
+                            decoration_width = (parseFloat(design["decoration_width"]) * ($('#product-svg').width() / design["container_width"])).toFixed()
+
+                            // Add the css properties to the decoration image
+                            all_css = { 'display': 'block', 'position': 'absolute', 'top': `${decoration_top}px`, 'left': `${decoration_left}px`, 'height': `${decoration_height}px`, 'width': `${decoration_width}px` }
+
+                            // Check if the decoration was modified
+                            if (design["decoration_style"]) {
+                                array_styles = design["decoration_style"].split(";")
+                                for (style of array_styles) {
+                                    specific_style = style.split(':')
+                                    // Height and width are already set
+                                    if (($.trim(specific_style[0]) !== 'height') && ($.trim(specific_style[0]) !== 'width')) {
+                                        this.all_css[specific_style[0]] = specific_style[1]
+                                    }
+                                }
+                                $('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
+                            } else {
+                                $('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
+                            }
+                        }
+                    }
+                }
+            })
+        })
+    </script>
+    {% endblock %}

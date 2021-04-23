@@ -99,8 +99,8 @@
                                 </div>
                             </form>
                             <a class="update-link text-info"><small>Update</small></a>
-                            <a class="remove-item text-danger float-right"
-                                id="remove_{{ item.item_id }}" name={{item.design_id}}><small>Remove</small></a>
+                            <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}"
+                                name={{item.design_id}}><small>Remove</small></a>
                         </td>
                         <td class="py-3">
                             <p class="my-0">${{ item.product.price | calc_subtotal:item.quantity }}</p>
@@ -162,7 +162,7 @@
             if (design['full_box active_svg']) {
                 $(this).find('.full_box').css({ 'fill': design['full_box active_svg'], 'display': 'inline' }).attr('class', 'full_box active_svg');
             } else if (design['full_box']) {
-                $(this).find('.full_box').css({ 'fill':design['full_box'], 'display': 'inline' }).attr('class', 'full_box active_svg');
+                $(this).find('.full_box').css({ 'fill': design['full_box'], 'display': 'inline' }).attr('class', 'full_box active_svg');
             }
             if (design['top_box active_svg']) {
                 $(this).find('.top_box').css({ 'fill': design['top_box active_svg'], 'display': 'inline' }).attr('class', 'top_box active_svg');

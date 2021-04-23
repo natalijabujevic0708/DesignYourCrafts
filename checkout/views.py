@@ -36,7 +36,7 @@ def checkout(request):
 
     if request.method == 'POST':
         bag = request.session.get('bag', {})
-
+        design = json.loads(request.POST.get('design'))
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -74,6 +74,9 @@ def checkout(request):
                     return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
+            order_model = Order.objects.get(order_number=order.order_number)
+            order_model.design=design
+            order_model.save()
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. \
@@ -138,7 +141,7 @@ def checkout_success(request, order_number):
         # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
-
+        
         # Save the user's info
         if save_info:
             profile_data = {
@@ -161,6 +164,7 @@ def checkout_success(request, order_number):
     if 'bag' in request.session:
         del request.session['bag']
 
+    
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,

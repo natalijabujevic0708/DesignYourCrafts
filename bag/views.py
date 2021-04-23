@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect, reverse, HttpResponse, get_object
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.contrib import messages
 
-# from .models import Design
 from products.models import Product, Pattern, Decoration, Icon, Category
 
 def view_bag(request):

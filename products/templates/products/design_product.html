@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<div class="container-fluid product_design_container" >
+<div class="container-fluid product_design_container">
     <div class="row">
         <div id="container" class="col-12 col-md-8 offset-md-2 col-lg-6  offset-lg-0">
             <!--SVG layer-->
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 edit_div">
             {% if request.user.is_superuser %}
             <small class="ml-3">
                 <a href="{% url 'edit_product' product.id %}">Edit</a> |
@@ -82,12 +82,12 @@
             </form>
             <p> Choose an area to design </p>
             <div class="row boxes">
-                <div class="col-4 border" id="box_full"
-                    style="background: url('{{ product.icon.icon_full.url }}')  no-repeat center center;"></div>
-                <div class=" col-4" id="box_top"
-                    style="background: url('{{ product.icon.icon_top.url }}')  no-repeat center center;"></div>
-                <div class="col-4" id="box_bottom"
-                    style="background: url('{{product.icon.icon_bottom.url }}')  no-repeat center center;"></div>
+                <div class="col-4 border" id="box_full" style="background: url('{{ product.icon.icon_full.url }}')
+                    no-repeat center center;"></div>
+                <div class=" col-4" id="box_top" style="background: url('{{ product.icon.icon_top.url }}') no-repeat
+                    center center;"></div>
+                <div class="col-4" id="box_bottom" style="background: url('{{product.icon.icon_bottom.url }}')
+                    no-repeat center center;"></div>
             </div>
             <!-- Tab links -->
             <div class="tab">
@@ -120,7 +120,7 @@
                     <label for="font_family">Choose a font-family: </label>
                     <select name="font_family" id="font_family">
                         <option> ----- </option>
-                        <option value="Amatic SC" style="font-family: 'Amatic SC', cursive"> Amatic SC</option>
+                        <option value="Amatic SC" style="font-family:'Amatic SC', cursive"> Amatic SC</option>
                         <option value="Dancing Script" style="font-family: 'Dancing Script', cursive;">Dancing Script
                         </option>
                         <option value="Homemade Apple" style="font-family: 'Homemade Apple', cursive;">Homemade Apple
@@ -165,64 +165,66 @@
 {% endblock %}
 
 {% block postloadjs %}
-<script src="{% static 'js/jscolor.js' %}"></script>
+<script src="{% static 'js/jscolor.js'%}"></script>
 <script src="{% static 'js/apply_design.js' %}"></script>
-<script src="{% static 'js/set_backgrounds.js' %}"></script>
+<script src="{% static 'js/set_backgrounds.js'%}"></script>
 <script src="{% static 'js/edit_options.js' %}"></script>
 <script src="{% static 'js/design_tabs.js' %}"></script>
 <script src="{% static 'js/change_svg.js' %}"></script>
 <script type="text/javascript">
-    $('.toast').toast('show');
-    
-    $('#submit_button').click(function () {
+    $(".toast").toast("show");
+    // Save the design to local storage 
+    $("#submit_button").click(function () {
         // Get the ID of the design
-        design_id = $('#design_id').attr('value')
+        design_id = $("#design_id").attr("value")
         design_details = {}
+        // Get the image src
+        design_details.background_image = $("#background-image").attr("src")
+        design_details.lock_image = $("#lock_image").attr("src")
         // Get the part of the item and the pattern/colour
-        $('path').filter(function () {
-            if ($(this).css('display') == 'inline') {
+        $("path").filter(function () {
+            if ($(this).css("display") == "inline") {
                 // if the fill is black add opacity 0
-                if($(this).css('fill')==='rgb(0, 0, 0)'){
-                    design_details[$(this).attr("class")] = 'rgb(0, 0, 0, 0)'
-                }else{
-                    design_details[$(this).attr("class")] = $(this).css('fill')
+                if ($(this).css("fill") === "rgb(0, 0, 0)") {
+                    design_details[$(this).attr("class")] = "rgb(0, 0, 0, 0)"
+                } else {
+                    design_details[$(this).attr("class")] = $(this).css("fill").replace(/"/g, "'")
                 }
-                
             }
         })
         // Width and height of the parent div
-        design_details["container_width"]= $('#product-svg').width()
-        design_details["container_height"] = $('#product-svg').height()
+        design_details["container_width"] = $("#product-svg").width()
+        design_details["container_height"] = $("#product-svg").height()
         // If the textarea is selected get the relevant info and store it to local storage
-        if ($(text_area_div).css('display') == 'block') {
+        if ($(text_area_div).css("display") == "block") {
             // Text content
-            design_details["textarea_text"] = $('#textarea').val()
+            design_details["textarea_text"] = $("#textarea").val()
             // Top and left offset
-            design_details["textarea_top"] = $('#text_area_div').offset().top - $('#product-svg').offset().top
-            design_details["textarea_left"] = $('#text_area_div').offset().left - $('#product-svg').offset().left
+            design_details["textarea_top"] = $("#text_area_div").offset().top - $("#product-svg").offset().top
+            design_details["textarea_left"] = $("#text_area_div").offset().left - $("#product-svg").offset().left
             // Font-size and font-family
-            design_details["font_size"] = $("#textarea").css('font-size')
-            design_details["font-family"]= $("#textarea").css('font-family')
+            design_details["font_size"] = $("#textarea").css("font-size")
+            design_details["font-family"] = $("#textarea").css("font-family")
         }
         // If the decoration is selected get the relevant info and store it to local storage
-        if ($(".chosen_decoration_div:not(#original_decoration_div)").css('display') == 'block') {
+        if ($(".chosen_decoration_div:not(#original_decoration_div)").css("display") == "block") {
             // Loop through each decoration
             $(".chosen_decoration_div:not(#original_decoration_div)").each(function () {
                 // Image src
-                design_details["decoration_src"] = $(this).find('img').attr("src")
+                design_details["decoration_src"] = $(this).find("img").attr("src")
                 // Check if the style was modified
-                if ($(this).find('img').attr("style")) {
-                    design_details["decoration_style"] = $(this).find('img').attr("style")
+                if ($(this).find("img").attr("style")) {
+                    design_details["decoration_style"] = $(this).find("img").attr("style")
                 }
-                design_details["decoration_width"]= $(this).find('img').width()
-                design_details["decoration_height"]= $(this).find('img').height()
+                design_details["decoration_width"] = $(this).find("img").width()
+                design_details["decoration_height"] = $(this).find("img").height()
 
                 // Top and left offset
-                design_details["decoration_top"]= $(this).find('img').offset().top - $('#product-svg').offset().top
-                design_details["decoration_left"]= $(this).find('img').offset().left - $('#product-svg').offset().left
+                design_details["decoration_top"] = $(this).find("img").offset().top - $("#product-svg").offset().top
+                design_details["decoration_left"] = $(this).find("img").offset().left - $("#product-svg").offset().left
             })
         }
-        localStorage.setItem(design_id, JSON. stringify(design_details))
+        localStorage.setItem(design_id, JSON.stringify(design_details))
     })
 
 </script>
