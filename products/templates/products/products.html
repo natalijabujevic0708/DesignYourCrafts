@@ -12,19 +12,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="dropdown product-container ">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort products
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
-                <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By
-                    Category</a>
-            </div>
-        </div>
-        <div class="product-container col-10 offset-1">
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+            <div class="col-12 col-lg-6 my-auto py-1 py-lg-0">
                 <form method="GET" action="{% url 'products' %}">
                     <div class="input-group w-100">
                         <input class="form-control border border-black rounded-0" type="text" name="q"
@@ -39,9 +27,20 @@
                     </div>
                 </form>
             </div>
+            <div class="dropdown col-lg-6">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort products
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
+                    <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By
+                        Category</a>
+                </div>
+            </div>
             
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card-body pb-0">
+            <div>
+                <div class="card-body pb-0 mb-5">
                     {% for category in current_categories %}
                     <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ category.name }}">
                         <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ category.friendly_name }}</span>

@@ -3,6 +3,7 @@
 body, html {
   margin: 0;
   padding: 0;
+  font-family: FontAwesome;
 }
 
 body, html, textarea {
@@ -16,14 +17,78 @@ body, html, textarea {
 
 /*---------------------------- index.html */
 
+.button_home span{
+  position: relative;
+  z-index: 2;
+}
+
+.button_home:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #363344;
+  transition: all .35s;
+}
+
+.button_home:hover{
+  color: #fff;
+  text-decoration: none;
+}
+
+.button_home:hover:after{
+  width: 100%;
+}
 .home_hero {
-  background: url('/media/welcome_photo.jpg') no-repeat center center;
+  background: url('/media/Image by Juraj Varga from Pixabay .jpg') no-repeat center center;
   background-size: cover;
   height: 100vh;
   width: 100vw;
+  text-align: center;
+  color: white;
+}
+.title{
+  font-size: 5vh;
+  
+}
+.logo{
+  font-family: 'Lobster', cursive;
+  font-size: 5vh;
+}
+.logo:hover{
+  color: #000;
+}
+.intro_question{
+  font-size: 3.25vh;
 }
 
+.buttons{
+  font-size: 3vh;
+}
+.button_home{
+  color: white;
+  border: 1px solid white;
+  border-radius: 15px;
+  width: fit-content;
+  margin: auto;
+  padding: 3vh;
+  background-color: rgb(255,255,255, 0.2);
+  position: relative;
+  transition: all .35s;
+}
+
+
+
 /*---------------------------- design_product.html */
+.category_image{
+  height: 40vh;
+}
+.category_name{
+  text-align: center;
+  font-size: 2.5vh;
+}
 .edit_div{
   z-index: 99999;
   background-color: white;
@@ -248,9 +313,31 @@ textarea::-webkit-scrollbar {
 
 /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
+  .title{
+    padding-top: 4vh;
+  }
+  .intro_question{
+    font-size: 3vh;
+  }
+  .statement{
+    font-size: 4vh;
+  }
+  .buttons{
+    margin-top: 25vh;
+  }
+  .button_home {
+    padding: 2vh;
+    background-color: rgb(56, 54, 64, 0.9);
+    border: 2px solid white;
+    width: auto;
+  }
   .header-container {
       padding-top: 116px;
   }
+  .header-container-index {
+    padding-top: 58px;
+}
+  
   body {
       height: calc(100vh - 116px);
   }
@@ -386,12 +473,25 @@ color: #17a2b8; /* text-info */
   .header-container {
       padding-top: 164px;
   }
+  .header-container-index{
+    padding-top:82px;
+  }
+  .intro{
+    padding: 13vh 20vw;
+    font-size: 4vh;
+  }
 }
 /* pad the top a bit when navbar is collapsed on mobile */
 @media (max-width: 991px) {
   .header-container {
       padding-top: 116px;
   }
+  .header-container-index{
+    padding-top: 58px;
+  }
+  .intro{
+  padding-top: 5vh;
+}
   body {
       height: calc(100vh - 116px);
   }

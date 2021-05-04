@@ -27,17 +27,19 @@ def profile(request):
     orders = profile.orders.all()
     design_history=[]
     product_id =[]
-    for order in orders:
-        product_id.extend(ast.literal_eval(order.original_bag).keys())
-        design_list = ast.literal_eval(order.design)
-        if len(design_list)>1:
-            for design in design_list:
-                design_history.append(design)
-        else:
-            design_history.append(design_list[0])
+    if orders:
+        for order in orders:
+            product_id.extend(ast.literal_eval(order.original_bag).keys())
+            design_list = ast.literal_eval(order.design)
+            if len(design_list)>1:
+                for design in design_list:
+                    design_history.append(design)
+            else:
+                design_history.append(design_list[0])
     products=[]
-    for id in product_id:
-        products.append(get_object_or_404(Product, pk=id))
+    if product_id:
+        for id in product_id:
+            products.append(get_object_or_404(Product, pk=id))
 
     template = 'profiles/profile.html'
     context = {
