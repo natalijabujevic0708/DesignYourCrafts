@@ -4,6 +4,7 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: FontAwesome;
+ 
 }
 
 body, html, textarea {
@@ -14,6 +15,33 @@ body, html, textarea {
 .text_black {
   color: black;
 }
+/*---------------------------- Footer */
+.icons{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+#footer{
+  height: 6vh;
+  width:100%;
+  text-align: center;
+  bottom: 0;
+  background-color: white;
+  padding-top: 1vh;
+  position: relative;
+  margin-top: -6vh;
+  clear: both;
+  display: inline-block;
+}
+.icon{
+  color: black;
+  font-size: 3vh;
+}
+.icon:hover{
+  color:#363344;
+  text-decoration: none;
+}
+
 
 /*---------------------------- index.html */
 
@@ -78,7 +106,46 @@ body, html, textarea {
   position: relative;
   transition: all .35s;
 }
-
+/*---------------------------- about_page.html */
+#slideshow { 
+  position: relative; 
+  width: 25vw; 
+  height: 25vh; 
+  padding: 10px; 
+}
+.section_about{
+  min-height: 25vh;
+  border: 1px solid #b9b3b3;
+  padding: 4vh;
+  max-width: 100%;
+  margin: 10vh;
+}
+#slideshow > img, .finished_product { 
+  position: absolute; 
+  top: 10px; 
+  right: 10px; 
+  bottom: 10px; 
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.intro_question{
+  text-align: center;
+  padding: 10vh;
+  padding-bottom: 0;
+  font-size: 3vh;
+}
+.steps_div{
+  font-size: 2.5vh;
+  text-align: center;
+}
+.steps_title{
+  font-family: Lobster;
+}
+video{
+  height: auto;
+  width: 50vw;
+}
 
 
 /*---------------------------- design_product.html */
@@ -90,7 +157,7 @@ body, html, textarea {
   font-size: 2.5vh;
 }
 .edit_div{
-  z-index: 99999;
+  z-index: 4;
   background-color: white;
 }
 .product_design_container, .product-container {
