@@ -141,6 +141,7 @@ textarea {
 #demo_video{
 	background: url('/media/demo.gif') no-repeat center center;
 	background-size: contain;
+	min-height: 40vh;
 }
 
 #slideshow {

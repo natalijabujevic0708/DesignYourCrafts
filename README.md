@@ -36,16 +36,20 @@ The following are the features provided in the **Design Your Craft** application
 
 ## Home & About page
 * Users can learn about the purpose of the site on the Home and About page.
+<img src="media//readme_images/home_example.png" alt="Home page" style="max-height:200px">
+<p>&nbsp;</p>
+<img src="media/readme_images/about us.gif" alt="About page" style="max-height:200px">
+<p>&nbsp;</p>
 
 ## Start the design
 * The user is presented with 3 categories of the products - Jewlery boxes, Christmas decorations and Bottles.
 
-    <img src="static/images/readme_images/location_details.png" alt="Location details" style="max-height:200px">
+    <img src="media/readme_images/categories_example.png" alt="Product categories" style="max-height:200px">
     <p>&nbsp;</p>
 
 * After deciding about a category, the user can choose a specific product to design.
 
-    <img src="static/images/readme_images/cleaned_location_details.png" alt="Cleaned location details" style="max-height:200px">
+    <img src="media/readme_images/product_example.png" alt="Products" style="max-height:200px">
     <p>&nbsp;</p>
 
 * There are many options for the design:
