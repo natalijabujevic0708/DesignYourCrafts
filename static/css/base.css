@@ -126,6 +126,22 @@ textarea {
 	background: url('/media/finished_product.jpg') no-repeat center center;
 	background-size: contain;
 }
+#bottles_intro {
+	background: url('/media/bottles_intro_cvS9i3d.jpg') no-repeat center center;
+	background-size: contain;
+}
+#christmas_intro {
+	background: url('/media/christmas_intro.jpg') no-repeat center center;
+	background-size: contain;
+}
+#intro_jewlery {
+	background: url('/media/intro_jewlery.jpg') no-repeat center center;
+	background-size: contain;
+}
+#demo_video{
+	background: url('/media/demo.gif') no-repeat center center;
+	background-size: contain;
+}
 
 #slideshow {
 	position: relative;
