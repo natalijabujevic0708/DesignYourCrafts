@@ -122,6 +122,10 @@ textarea {
 
 
 /*---------------------------- about_page.html */
+.finished_product_div{
+	background: url('/media/finished_product.jpg') no-repeat center center;
+	background-size: contain;
+}
 
 #slideshow {
 	position: relative;
