@@ -1,17 +1,10 @@
-
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
+
 
 {% block content %}
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-10 offset-1">
             <p class="d-block d-lg-none logo text-center mb-5"> Product categories</p>
@@ -19,9 +12,10 @@
                 {% for category in current_categories %}
                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-5">
                     <div class="card h-100 border-0">
-                        
+
                         <a href="{% url 'products' %}?category={{category.name}}">
-                            <img class="card-img-top img-fluid category_image" src="{{ category.category_image.url }}" alt="{{ product.name }}">
+                            <img class="card-img-top img-fluid category_image" src="{{ category.category_image.url }}"
+                                alt="{{ product.name }}">
                         </a>
                         <div class="card-body pb-0">
                             <p class="mb-0 category_name">{{ category.friendly_name }}</p>
@@ -49,9 +43,17 @@
                 </div>
                 {% endif %}
                 {% endfor %}
-                </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+{% endblock %}
+{% block postloadjs %}
+<script type="text/javascript">
+    $(".toast").toast("show");
+    // Nav bar item active
+    $(".nav-item").removeClass("active");
+    $(".nav_design").addClass("active");
+</script>
 {% endblock %}

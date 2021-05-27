@@ -1,12 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% block page_header %}
-<div class="container header-container-index">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
 
 {% block content %}
 <!-- Home page on small screens-->
@@ -14,29 +7,39 @@
     <div class="row title">
         <div class="col intro_small">
             <p class="logo">Design your crafts</p>
-            <p class="intro_question">Have you always dreamed of designing your own jewlery box or christmas decoration and having it handmade
+            <p class="intro_question">Have you always dreamed of designing your own jewlery box or christmas decoration
+                and having it handmade
                 for you?</p>
             <p class="statement">Look no further and start designing!</p>
         </div>
     </div>
     <div class="row buttons">
-        <div class="col-6"><a class="button_home" href="{% url 'product_categories' %}"><span>Start the design</span></a></div>
-        <div class="col-6"><a class="button_home"><span> Learn more </span> </a></div>
+        <div class="col-6"><a class="button_home" href="{% url 'product_categories' %}"><span>Start the
+                    design</span></a></div>
+        <div class="col-6"><a class="button_home" href="{% url 'about_page' %}"><span> Learn more </span> </a></div>
     </div>
 </div>
 <!-- Home page on large screens-->
 <div class="d-none d-lg-block home_hero container-fluid">
     <div class="row title">
         <div class="col intro">
-            <p class="intro_question">Have you always dreamed of designing your own jewlery box or christmas decoration and having it handmade
+            <p class="intro_question">Have you always dreamed of designing your own jewlery box or christmas decoration
+                and having it handmade
                 for you?</p>
             <p>Look no further and start designing!</p>
         </div>
     </div>
     <div class="row buttons">
-        <div class="col-6 "><a class="button_home" href="{% url 'product_categories' %}"><span>Start designing </span></a></div>
-        <div class="col-6 "><a class="button_home"><span> Learn more</a> </span></div>
+        <div class="col-6"><a class="button_home" href="{% url 'product_categories' %}"><span>Start designing
+                </span></a></div>
+        <div class="col-6"><a class="button_home" href="{% url 'about_page' %}"><span> Learn more</a> </span></div>
     </div>
 </div>
 {% endblock %}
-
+{% block postloadjs %}
+<script type="text/javascript">
+    // Nav bar item active
+    $(".nav-item").removeClass("active");
+    $(".nav_home").addClass("active");
+</script>
+{% endblock %}

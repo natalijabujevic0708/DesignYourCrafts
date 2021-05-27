@@ -1,50 +1,66 @@
 {% extends "base.html" %}
 {% load static %}
-{% load bag_tools %}
-{% block page_header %}
-<div class="container header-container-index">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
-
 
 {% block content %}
 <!-- About section-->
 <div class="container-fluid">
-    <div class="row intro_question">Have you ever wanted to make your own craft but didn't have the time or material?
-         Design Your Craft is a page where you can design a item and have it hand crafted for you.  </div>
-    <div class="row section_about">
-        <div class="col-6 steps_div"><span class="steps_title" >First step: Choose an item you want to design </span> <br>
-            <span></span><br><span class="steps_text"> Choose between jewlery boxes, christmas decoration or bottles</span>
+    <!-- About page on small screens-->
+    <div class="d-block d-lg-none  container-fluid">
+        <div class="row intro_question" style="display:block">
+            <p class="logo">Design your crafts</p>
+            <p class="intro_question">
+                Have you ever wanted to make your own craft but didn't have the time or material?
+                Design Your Craft is a page where you can design an item and have it handcrafted for you. </p>
         </div>
-        <div class="col-6" id="slideshow">
+    </div>
+
+    <!-- About page on large screens-->
+    <div class="d-none d-lg-block  container-fluid">
+        <div class="row intro_question">Have you ever wanted to make your own craft but didn't have the time or
+            material?
+            Design Your Craft is a page where you can design an item and have it handcrafted for you. </div>
+    </div>
+    <div class="row section_about">
+        <div class="col-12 col-lg-6 steps_div"><span class="steps_title">First step: Choose an item you want to design
+            </span>
+            <br>
+            <span></span><br><span class="steps_text"> Choose between jewlery boxes, christmas decoration or
+                bottles</span>
+        </div>
+        <div class="col-12 col-lg-6" id="slideshow">
             <img src="../media/bottles_intro_cvS9i3d.jpg">
             <img src="../media/christmas_intro.jpg">
             <img src="../media/intro_jewlery.jpg">
         </div>
-       
+
     </div>
     <div class="row section_about">
-        <div class="col-6"><video width="320" height="240" autoplay loop muted>
-            <source src="../media/demo.mp4" type="video/mp4" />
-          </video></div>
-        <div class="col-6 steps_div"><span class="steps_title" >Second step: Design your product </span> <br>
-            <span></span><br> <span class="steps_text"> Choose between different patterns, decorations or customised messages</span>
+        <div class="col-12 col-lg-6"><video width="320" height="240" autoplay loop muted>
+                <source src="../media/demo.mp4" type="video/mp4" />
+            </video></div>
+        <div class="col-12 col-lg-6 steps_div"><span class="steps_title">Second step: Design your product </span> <br>
+            <span></span><br> <span class="steps_text"> Choose between different patterns, decorations or customised
+                messages</span>
         </div>
     </div>
     <div class="row section_about" style="min-height:40vh;">
-        <div class="col-6 steps_div"><span class="steps_title" >Third step: Order a handcrafted item </span> <br>
-            <span></span><br> <span class="steps_text"> After you desiged an item, it will be handcrafted by one of our team members and send out to you!</span>
+        <div class="col-12 col-lg-6 steps_div "><span class="steps_title">Third step: Order a handcrafted item </span>
+            <br>
+            <span></span><br> <span class="steps_text"> After you desiged an item, it will be handcrafted by one of our
+                team members and send out to you!</span><br> <span class="steps_text"> When you register you can have
+                all of your past designs saved on your profile</span>
         </div>
-        <div class="col-6"><img class="finished_product" src="../media/finished_product.jpg"></div>
+        <div class="col-12 col-lg-6 finished_product_div"><img class="finished_product"
+                src="../media/finished_product.jpg"></div>
     </div>
 </div>
 
 {% endblock %}
 {% block postloadjs %}
 <script type="text/javascript">
+    // Nav bar item active
+    $(".nav-item ").removeClass("active");
+    $(".nav_about").addClass("active");
 
     $("#slideshow > img:gt(0)").hide();
 

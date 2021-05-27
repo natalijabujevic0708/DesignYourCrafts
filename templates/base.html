@@ -46,6 +46,7 @@
         crossorigin="anonymous"></script>
     <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
+    
     {% endblock %}
 
     {% block extra_js %}
@@ -55,7 +56,7 @@
 </head>
 
 <body>
-    <header class="container-fluid fixed-top">
+    <header class="container-fluid">
         <nav class="row navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +74,7 @@
                 <div class="dropdown-menu border-0" aria-labelledby="user-options">
                     {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
-                    <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>
+                    <a href="{% url 'add_product' %}" class="dropdown-item">Products <br> Management</a>
                     {% endif %}
                     <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                     <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
@@ -98,13 +99,13 @@
             </li>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto ">
-                    <li class="nav-item active">
+                    <li class="nav-item nav_home">
                         <a class="nav-link" href="{% url 'home' %}"> Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav_about">
                         <a class="nav-link" href="{% url 'about_page' %}">About Us</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav_design">
                         <a class="nav-link" href="{% url 'product_categories' %}">Start the design</a>
                     </li>
                 </ul>
@@ -175,8 +176,6 @@
     </div>
     {% endif %}
 
-    {% block page_header %}
-    {% endblock %}
 
     {% block content %}
     {% endblock %}
@@ -193,7 +192,7 @@
         $('.toast').toast('show');
     </script>
     {% endblock %}
-    
+
 
 </body>
 
