@@ -127,7 +127,7 @@ textarea {
 	background-size: contain;
 }
 #bottles_intro {
-	background: url('/media/bottles_intro_cvS9i3d.jpg') no-repeat center center;
+	background: url('/media/bottles_intro') no-repeat center center;
 	background-size: contain;
 }
 #christmas_intro {
@@ -196,6 +196,8 @@ video {
 
 .category_image {
 	height: 40vh;
+	object-fit: cover;
+
 }
 
 .category_name {

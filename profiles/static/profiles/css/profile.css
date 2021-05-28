@@ -19,3 +19,12 @@
     color: #aab7c4;
 }
 
+.past_design_btn{
+    background-color: #cdcfd2;
+}
+
+.past_design_btn:hover{
+    color: white;
+    background-color: #363344;;
+}
+

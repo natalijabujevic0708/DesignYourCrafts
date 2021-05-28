@@ -12,7 +12,7 @@ import ast, json
 
 @login_required
 def profile(request):
-    """ Display the user's profile with past orders and past design """
+    """ Display the user's profile with past orders"""
     profile = get_object_or_404(UserProfile, user=request.user)
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
@@ -23,6 +23,22 @@ def profile(request):
             messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
+    
+    orders = profile.orders.all()
+   
+    template = 'profiles/profile.html'
+    context = {
+        
+        'form': form,
+        'orders': orders,
+        'on_profile_page': True
+    }
+    return render(request, template, context)
+
+@login_required
+def past_designs(request):
+    """ Display the user's past design """
+    profile = get_object_or_404(UserProfile, user=request.user)
     patterns = Pattern.objects.all()
     orders = profile.orders.all()
     design_history=[]
@@ -41,11 +57,10 @@ def profile(request):
         for id in product_id:
             products.append(get_object_or_404(Product, pk=id))
 
-    template = 'profiles/profile.html'
+    template = 'profiles/past_designs.html'
     context = {
         'products': products,
         'design_history': json.dumps(design_history),
-        'form': form,
         'orders': orders,
         'on_profile_page': True
     }

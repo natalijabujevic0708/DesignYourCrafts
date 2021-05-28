@@ -57,14 +57,14 @@ class Product(models.Model):
         return self.name
 
 class Decoration(models.Model):
-    """Model representing a Decoration. Optional Field: sku """
+    """Model representing a Decoration """
 
     name = models.CharField(max_length=254, null=True, blank=True)
     decoration_image = models.ImageField(null=True)
 
 
 class Pattern(models.Model):
-    """Model representing a Pattern. Optional Field: sku """
+    """Model representing a Pattern """
     
     name = models.CharField(max_length=254, null=True, blank=True)
     href = models.CharField(max_length=1000, null=True)
