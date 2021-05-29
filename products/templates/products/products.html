@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-
-
 {% block content %}
 <div class="container mt-5 mb-5">
     <div class="row">
@@ -32,12 +30,11 @@
                     Category</a>
             </div>
         </div>
-
         <div>
             <div class="card-body pb-0 mb-5">
                 {% for category in current_categories %}
                 <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ category.name }}">
-                    <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{category.friendly_name }}</span>
+                    <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{category.friendly_name}}</span>
                 </a>
                 {%endfor%}
                 <a class="category-badge text-decoration-none" href="{% url 'products' %}">

@@ -4,11 +4,11 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+
 from .models import Product, Pattern, Decoration, Icon, Category
 from .forms import ProductForm
 
 
-# Create your views here.
 def product_categories(request):
     """ A view to show product categories """
     categories = Category.objects.all()

@@ -37,7 +37,7 @@ def profile(request):
 
 @login_required
 def past_designs(request):
-    """ Display the user's past design """
+    """ Display the user's past designs """
     profile = get_object_or_404(UserProfile, user=request.user)
     patterns = Pattern.objects.all()
     orders = profile.orders.all()
@@ -67,6 +67,7 @@ def past_designs(request):
     return render(request, template, context)
 
 def order_history(request, order_number):
+    """ Display the user's order history """
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.info(request, (
