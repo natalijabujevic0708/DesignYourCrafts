@@ -11,13 +11,13 @@ Have you ever wanted to make your own craft but didn't have the time or material
 
 ## How does it work?
 
-First step: Choose an item you want to design 
+### First step: Choose an item you want to design  
 Choose between jewlery boxes, christmas decoration or bottles.
 
-Second step: Design your product 
+### Second step: Design your product 
 Choose between different patterns, decorations or customised messages
 
-Third step: Order a handcrafted item 
+### Third step: Order a handcrafted item 
 After you desiged an item, it will be handcrafted by one of our team members and send out to you!
 
 Users can create a handcrafted item with the **Design Your Craft** application upon their first use of the application. No registration is necessary to design and order an item.
@@ -29,7 +29,7 @@ Users who are interested can sign up and have their past designs and orders info
 The following are the features provided in the **Design Your Craft** application. 
 
 ## Navigation bar and Footer
-* Each page features a **navigation bar** that has 3 navigation links - Home, About Us and Start the design.On a screen size smaller than a tablet the navbar becomes a collapsible element. In the right corner there are Profile and Shopping list icons.
+* Each page features a **navigation bar** that has 3 navigation links - Home, About Us and Start the design. On a screen size smaller than a tablet the navbar becomes a collapsible element. In the right corner there are Profile and Shopping list icons.
 
 
 * Each page features **social media links**  at the bottom. They redirect a user to the social media platform opening it in a new window. 
@@ -58,18 +58,15 @@ The following are the features provided in the **Design Your Craft** application
  - text
  - decoration
 
-    <img src="static/images/readme_images/locations.png" alt="Locations" style="max-height:250px">
+    <img src="media/demo.gif" alt="Design demo" style="max-height:250px">
     <p>&nbsp;</p>
 * After the design is finished, the user can add it to the bag and complete the checkout to buy the product:
 
 
 
 ## User Login and Registration
-* Registering users are asked to create a username, provide an email address, date of birth and home address.
+* Registering users are asked to create a username, provide an email address and create a password.
 * Users have to log in in order to have their order and design saved in their profile.  
-
-    <img src="static/images/readme_images/login.png" alt="Login" style="max-height:200px">
-    <p>&nbsp;</p>
 
 
 
@@ -79,13 +76,12 @@ The following are the features provided in the **Design Your Craft** application
     <img src="static/images/readme_images/profile.png" alt="Profile" style="max-height:200px">
     <p>&nbsp;</p>
 
-* Option to log out.
+
  
 
 
 
-## Features Left to Implement
-* 
+
 
 
 # Wireframes
@@ -134,6 +130,9 @@ Testing information can be found in the separate testing file that can be access
 Database information can be found in the separate file that can be accessed [here](https://github.com/natalijabujevic0708/..../DATABASE.md).
 
 
+## Bugs/ Features Left to Implement
+
+
 # Technologies 
 
 ## Languages
@@ -150,16 +149,17 @@ Database information can be found in the separate file that can be accessed [her
 - [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) - to style Django forms.
 - [Fontawesome (4.7.0)](https://fontawesome.com/v4.7.0/) library for custom icons
 - [Google Fonts](https://fonts.google.com/) for the fonts used throughout the page
-- [Google Maps](https://cloud.google.com/maps-platform) - geo-location API
 - [Gunicorn](https://pypi.org/project/gunicorn/) - a Python WSGI HTTP Server to enable deployment to Heroku.
 - [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) - templating language for Python
 - [JQuery](https://jquery.com/) for DOM manipulation.
+- [jscolor.js](https://jscolor.com/docs/) - jscolor.js is a JavaScript color picker with opacity channel
 - [Psycopg2](https://pypi.org/project/psycopg2/) - to enable the PostgreSQL database to function with Django.
 - [Stripe](https://stripe.com/ie) - to handle financial transactions.
 
 ### Tools
 - [Vectr](https://vectr.com/) - for creating the Vector Shape / SVG Markup.
 - [Balsamiq](https://balsamiq.com/) - to create wireframes.
+- [xiconeditor](http://www.xiconeditor.com/) - to create icons
 
 ### Databases
 - [SQlite3](https://www.sqlite.org/index.html) - a development database.
@@ -169,7 +169,7 @@ Database information can be found in the separate file that can be accessed [her
 - [Git](https://git-scm.com/) for version control
 - [Github](https://github.com/) to store repositories of the project
 - [Heroku](https://www.heroku.com/) for hosting the deployed app
-- [AWS S3 Bucket](https://aws.amazon.com/) -  to store static and media files in prodcution.
+- [AWS S3 Bucket](https://aws.amazon.com/) -  to store static and media files in production.
 - [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) for compatibility with AWS.
 
 
@@ -180,11 +180,16 @@ This project has been pushed and deployed to the cloud application platform [Her
 
 ## Credits
 ### Code 
-* [TEMPLATED](https://templated.co/epilogue): CSS, HTML5 & Responsive site template Epilogue by TEMPLATED used throughout the project: index.html basic design, buttons, footer.
-* [ Pretty Printed](https://www.youtube.com/watch?v=DsgAuceHha4): a tutorial on Save and Retrieve Files In a MongoDB With Flask-Pymongo.
-* [Confetti animation](https://codemyui.com/confetti-falling-background-using-canvas/): The code from codemyui.com was used to create the confetti animation.
-* Example code to retain the scroll position of a scrollable area when pressing the back button found on Stack Overflow - [link](https://stackoverflow.com/questions/29203312/how-can-i-retain-the-scroll-position-of-a-scrollable-area-when-pressing-back-but)
-* Example code to create a list that contains the dates of all the Saturdays starting from today found on Stack Overflow - [link](https://stackoverflow.com/questions/20898661/how-to-get-saturdays-and-sundays-dates-of-a-month-javascript)
+*[boutique_ado_v1](https://github.com/ckz8780/boutique_ado_v1): Project that was followed to create most of the layount and the functionality for the project Design your Crafts (Products, Shopping bag, Checkout, Profile...)
+* [ Dynamically Change the Colors ](https://tympanus.net/codrops/2019/09/03/how-to-dynamically-change-the-colors-of-product-images-using-css-blend-mode-and-svg/): Tutorial used to dynamically change the colors and patterns of product images using CSS Blend Mode and SVG
+* [ Auto-Playing Slideshow ](https://css-tricks.com/snippets/jquery/simple-auto-playing-slideshow/): Tutorial used to create the slideshow in the About Us section
+* [ How to create tabs]https://www.w3schools.com/howto/howto_js_tabs.asp): Tutorial used to create tabs in the Start the Design section
+* Example code to add dynamic text to canvas image found on Codepen - [link](https://codepen.io/ahebler/pen/KzyQBZ)
+* Example code to create a draggable text box in canvas found on Stack Overflow - [link](https://stackoverflow.com/questions/59828371/draggable-text-box-on-top-of-canvas-image)
+* Example code to add, resize, position and color change text inside a div using jquery
+ found on Stack Overflow - [link](https://stackoverflow.com/questions/40103239/add-resize-position-color-change-text-inside-a-div-using-jquery)
+* Example code to allow a user to resize a image on the page found on Stack Overflow - [link](https://stackoverflow.com/questions/31545041/allowing-a-user-to-resize-a-image-on-the-page)
+* Example code to rotate images with slider found on Codepen - [link](https://codepen.io/companionstudio/pen/ewxboE)
 
 
 ### Content
@@ -193,7 +198,7 @@ This project has been pushed and deployed to the cloud application platform [Her
 
 
 ### Media
-* Images were taken from freely-usable source Pexels:
+* Paintbrush icon was taken from the [depositphotos.com](https://depositphotos.com/289261084/stock-illustration-paintbrush-line-icon-colorful-paint.html)
 
 ## Acknowledgements
 I would like to thank my mentor Brian Macharia for his advice and help with this project.
