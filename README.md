@@ -162,8 +162,14 @@ Database information can be found in a separate file that can be accessed [here]
 
 # Bugs/ Features Left to Implement
 * .draggable() on mobile devices - the function draggable doesn't work on touchscreen devices. The plan was to use the [jQuery UI Touch Punch library](https://github.com/furf/jquery-ui-touch-punch) but it wasn't working when implemented in the code as it looks like it was [deprecated](https://touchpunch.furf.com/). This is still an issue as it's not possible to change the placement of decoration/text while designing on mobile devices.
-* different designs of the same product - since the shopping bag is based on the product ids, when a customer creates a design of a product and they create another design of the same product it will replace the original design in the shopping bag.
+<p>&nbsp;</p>
 
+* different designs of the same product - since the shopping bag is based on the product ids, when a customer creates a design of a product and they create another design of the same product it will replace the original design in the shopping bag.
+<img src="media/readme_images/duplicate-bug.gif" alt="Duplicated product bug" style="max-height:250px">
+    <p>&nbsp;</p>
+* decoration in the Shopping bag after adjusting the skew or rotation - when using the rotation or the skew of a decoration, the positioning of the decoration in the Shopping bag is incorrect.  
+<img src="media/readme_images/positioning-bug.gif" alt="Wrong position of a decoration" style="max-height:250px">
+    <p>&nbsp;</p>
 
 # Technologies 
 
