@@ -159,16 +159,18 @@
                         decoration_width = (parseFloat(design["decoration_width"]) * ($('#product-svg').width() / design["container_width"])).toFixed()
 
                         // Add the css properties to the decoration image
-                        all_css = { 'display': 'block', 'position': 'absolute', 'top': `${decoration_top}px`, 'left': `${decoration_left}px`, 'height': `${decoration_height}px`, 'width': `${decoration_width}px` }
+                        var all_css = { 'display': 'block', 'position': 'absolute', 'top': `${decoration_top}px`, 'left': `${decoration_left}px`, 'height': `${decoration_height}px`, 'width': `${decoration_width}px` }
 
                         // Check if the decoration was modified
                         if (design["decoration_style"]) {
                             array_styles = design["decoration_style"].split(";")
                             for (style of array_styles) {
                                 specific_style = style.split(':')
-                                // Height and width are already set
-                                if (($.trim(specific_style[0]) !== 'height') && ($.trim(specific_style[0]) !== 'width')) {
-                                    this.all_css[specific_style[0]] = specific_style[1]
+                                if (specific_style[0]) {
+                                    // Height and width are already set
+                                    if (($.trim(specific_style[0]) !== 'height') && ($.trim(specific_style[0]) !== 'width')) {
+                                        all_css[specific_style[0]] = specific_style[1]
+                                    }
                                 }
                             }
                             $('#decoration_img').attr('src', design["decoration_src"]).css(all_css)

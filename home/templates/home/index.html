@@ -16,7 +16,7 @@
     <div class="row buttons">
         <div class="col-6"><a class="button_home" href="{% url 'product_categories' %}"><span>Start the
                     design</span></a></div>
-        <div class="col-6"><a class="button_home" href="{% url 'about_page' %}"><span> Learn more </span> </a></div>
+        <div class="col-6"><a class="button_home" href="{% url 'about_page' %}"><span>Learn more</span></a></div>
     </div>
 </div>
 <!-- Home page on large screens-->
@@ -37,7 +37,7 @@
 </div>
 {% endblock %}
 {% block postloadjs %}
-<script type="text/javascript">
+<script>
     // Nav bar item active
     $(".nav-item").removeClass("active");
     $(".nav_home").addClass("active");
