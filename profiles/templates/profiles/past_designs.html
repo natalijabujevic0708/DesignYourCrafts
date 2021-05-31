@@ -125,38 +125,38 @@
                     }
                     // If textarea was selected in the design, get the relevant info 
                     if (design['textarea_text']) {
-                        $("#textarea").text(design['textarea_text'])
+                        $(this).find("#textarea").text(design['textarea_text'])
                         // Get the top and left offset with this calculation:
                         // minimized top offset = (minimized height/original height)*original top offset  
-                        textarea_top = ($('#product-svg').height() / design['container_height']) * design['textarea_top']
+                        textarea_top = ($(this).find('#product-svg').height() / design['container_height']) * design['textarea_top']
                         // minimized left offset = (minimized width/original width)*original left offset  
-                        textarea_left = ($('#product-svg').width() / design['container_width']) * design['textarea_left']
+                        textarea_left = ($(this).find('#product-svg').width() / design['container_width']) * design['textarea_left']
 
                         // Add the css properties to the text_area_div 
-                        $('#text_area_div').css('display', 'block').css('position', 'absolute').css('top', `${textarea_top}px`).css('left', `${textarea_left}px`)
+                        $(this).find('#text_area_div').css('display', 'block').css('position', 'absolute').css('top', `${textarea_top}px`).css('left', `${textarea_left}px`)
 
                         // Calculate font-size by removing the px part and calculating:
                         // minimazed font-size = original font size * (minimized width/original width)
                         font_size = (parseFloat((design['font_size'].slice(0, -2))) * ($('#product-svg').width() / design["container_width"])).toFixed()
-                        $("#textarea").css('font-size', `${font_size}px`)
+                        $(this).find("#textarea").css('font-size', `${font_size}px`)
 
                         // Add font-family
-                        $("#textarea").css('font-family', design["font-family"])
+                        $(this).find("#textarea").css('font-family', design["font-family"])
 
                     }
                     // If decoration was selected in the design, get the relevant info 
                     if (design["decoration_src"]) {
                         // Get the top and left offset with this calculation:
                         // minimized top offset = (minimized height/original height)*original top offset  
-                        decoration_top = ($('#product-svg').height() / design["container_height"]) * design["decoration_top"]
+                        decoration_top = ($(this).find('#product-svg').height() / design["container_height"]) * design["decoration_top"]
                         // minimized left offset = (minimized width/original width)*original left offset  
-                        decoration_left = ($('#product-svg').width() / design["container_width"]) * design["decoration_left"]
+                        decoration_left = ($(this).find('#product-svg').width() / design["container_width"]) * design["decoration_left"]
 
                         // Calculate height and width of the decoration:
                         // minimazed height = original height * (minimized height/original height)
-                        decoration_height = (parseFloat(design["decoration_height"]) * ($('#product-svg').height() / design["container_height"])).toFixed()
+                        decoration_height = (parseFloat(design["decoration_height"]) * ($(this).find('#product-svg').height() / design["container_height"])).toFixed()
                         // minimazed width = original height * (minimized height/original height)
-                        decoration_width = (parseFloat(design["decoration_width"]) * ($('#product-svg').width() / design["container_width"])).toFixed()
+                        decoration_width = (parseFloat(design["decoration_width"]) * ($(this).find('#product-svg').width() / design["container_width"])).toFixed()
 
                         // Add the css properties to the decoration image
                         var all_css = { 'display': 'block', 'position': 'absolute', 'top': `${decoration_top}px`, 'left': `${decoration_left}px`, 'height': `${decoration_height}px`, 'width': `${decoration_width}px` }
@@ -173,9 +173,9 @@
                                     }
                                 }
                             }
-                            $('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
+                            $(this).find('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
                         } else {
-                            $('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
+                            $(this).find('#decoration_img').attr('src', design["decoration_src"]).css(all_css)
                         }
                     }
                 }
