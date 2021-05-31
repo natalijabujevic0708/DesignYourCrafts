@@ -37,7 +37,7 @@
 <img src="media/testing_images/design2.png" alt="Design" style="max-height:250px"> 
 <p>&nbsp;</p>
 
-**Test:** Checkout succesfull.  
+**Test:** Checkout successful.  
 **Expected Outcome:** After a user buys an item, the summary of the order is displayed.  
 **Passed:** Yes 
 
@@ -46,7 +46,7 @@
 <p>&nbsp;</p>
 
 **Test:** Profile functionality.  
-**Expected Outcome:** The user can see the past orders and designs on they profile.  
+**Expected Outcome:** The user can see the past orders and designs on their profile.  
 **Passed:** Yes  
 
 <img src="media/testing_images/profile.png" alt="Profile" style="max-height:250px"> 
@@ -72,7 +72,7 @@
 <p>&nbsp;</p>
 
 
-**Test:** Try to register with a email that is already registered.   
+**Test:** Try to register with an email that is already registered.   
 **Expected Outcome:** Registering with a email that already exists raises an error.  
 **Passed:** Yes 
 
