@@ -12,7 +12,7 @@ Have you ever wanted to make your own craft but didn't have the time or the mate
 ## How does it work?
 
 ### First step: Choose an item you want to design  
-Choose between jewelry boxes, christmas decoration or bottles.
+Choose between Jewelry boxes, Christmas decoration or Bottles.
 
 ### Second step: Design your product 
 Choose between different patterns, decorations or customised messages
@@ -75,7 +75,7 @@ You can navigate through different categories from the products page.
 
 * After the design is finished, the user can add it to the bag 
 
-### Shopping Bag
+## Shopping Bag
 
 The shopping bag page has the image of the design, product, price, quantity and subtotal info, as well as the information about the total, shipping costs and grand total.
 
@@ -85,14 +85,14 @@ The user can add, edit or delete items from the shopping bag.
     <p>&nbsp;</p>
 
 
-### Checkout
+## Checkout
 
 The checkout page has a form where the user can add his/her personal details needed for the delivery and a field for the credit card number.
 
 <img src="media/readme_images/checkout.png" alt="Checkout" style="max-height:250px">
     <p>&nbsp;</p>
 
-### Checkout Success Page
+## Checkout Success Page
 
 After submitting an order, a summary of the order is shown in a page.
 <img src="media/readme_images/checkout_success.png" alt="Checkout Success Page" style="max-height:250px">
