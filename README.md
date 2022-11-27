@@ -1,6 +1,6 @@
 ![](media/readme_images/hero_image.png)
 
-View the project on Heroku [here](https://design-your-crafts.herokuapp.com/)
+View the project on Render [here](https://design-your-crafts.onrender.com/)
 
 # Overview
 
@@ -187,7 +187,7 @@ Database information can be found in a separate file that can be accessed [here]
 - [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) - to style Django forms.
 - [Fontawesome (4.7.0)](https://fontawesome.com/v4.7.0/) library for custom icons
 - [Google Fonts](https://fonts.google.com/) for the fonts used throughout the page
-- [Gunicorn](https://pypi.org/project/gunicorn/) - a Python WSGI HTTP Server to enable deployment to Heroku.
+- [Gunicorn](https://pypi.org/project/gunicorn/) - a Python WSGI HTTP Server to enable deployment.
 - [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) - templating language for Python
 - [JQuery](https://jquery.com/) for DOM manipulation.
 - [jscolor.js](https://jscolor.com/docs/) - jscolor.js is a JavaScript color picker with opacity channel
@@ -206,13 +206,13 @@ Database information can be found in a separate file that can be accessed [here]
 ### Hosting and deployment 
 - [Git](https://git-scm.com/) for version control
 - [Github](https://github.com/) to store repositories of the project
-- [Heroku](https://www.heroku.com/) for hosting the deployed app
+- [Render](https://render.com/) for hosting the deployed app
 - [AWS S3 Bucket](https://aws.amazon.com/) -  to store static and media files in production.
 - [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) for compatibility with AWS.
 
 
 # Deployment
-This project has been pushed and deployed to the cloud application platform [Heroku](https://www.heroku.com/).
+This project has been pushed and deployed to the cloud application platform [Render](https://render.com/).
 
 ### Fork the code on GitHub
 If you need to work on this code on your own, follow these steps:
@@ -249,38 +249,7 @@ To make a local clone of the site follow these steps:
 * to run the server type in the terminal
     ```python3 manage.py runserver```
 
-### Deploy to Heroku 
-Make sure to have those files in your project:
-* requirements.txt (type ```pip3 freeze > requirements.txt``` )
-* Procfile (inside type ```web: gunicorn your-app.wsgi:application```)
-Now go to Heroku, create an account if you don't have one, create a new app.
-* Select "Postgres" from resources
-* in settings.py comment out "DATABASES"
-* import dj_database_url
-* type in DATABASES 
-    ```'default': dj_database_url.parse("<your-postgres-url>")```
-* migrate the models
-    ```python3 manage.py makemigrations
-        python3 manage.py migrate
-    ```
-* migrate models to Postgres
-    ```python3 manage.py migrate```
-* load data to Postgres
-    ```python3 manage.py loaddata db.json```
-* create a superuser
-    ```python3 manage.py createsuperuser```
-* go back to settings.py, comment out 'default': dj_database_url.parse("<your-postgres-url>")`
- and un-comment the section previously commented out.
-* Commit and push to GitHub
-    ``` 
-    git add .
-    git commit -m "Some text"
-    git push
-    ```
-* Go to Heroku and add the environment variables
-* Click on the tab "Deploy" and connect with GitHub
-* Enable Automatic Deploy
-* Deploy Branch
+
 Create an account on AWS, and in [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html) open a bucket where you will store static/ files and media/ files.
 On Aws,
 * create a policy
